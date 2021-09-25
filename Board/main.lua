@@ -1,4 +1,4 @@
---function print() end
+f--function print() end
 
 display.setStatusBar(display.HiddenStatusBar)
 local composer 	= require "composer"
@@ -12,7 +12,7 @@ local dd 			= require "devicedetector"
 	  social		= require "modules.socialModule"
    _G.createButton	= require "modules.buttonModule"
 
-gcIsActive = true
+gcIsActive = false
 replaymode = false
 
 if gcIsActive then
@@ -27,16 +27,16 @@ if isSave then
 else
 	local gcSaves = tenflib.jsonSave("gcSaves",
 	{
-		fortyTwo=999,
-		colorsPicked=999,
-		redColorsPicked=999,
-		greenColorsPicked=999,
-		blueColorsPicked=999, 
-		levelsPlayed=999,
-		levelsFailed=999,
-		restarts=999,
-		stars=999,
-		started=999,
+		fortyTwo=0,
+		colorsPicked=0,
+		redColorsPicked=0,
+		greenColorsPicked=0,
+		blueColorsPicked=0, 
+		levelsPlayed=0,
+		levelsFailed=0,
+		restarts=0,
+		stars=0,
+		started=0,
 	})
 	isThereAsave = true
 end
