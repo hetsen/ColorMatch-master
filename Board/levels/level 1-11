@@ -1,0 +1,1 @@
+{"nColorsOnBoard":3,"Type":"Default","Name":"Ups and Downs","Tile":[4,4,5,3,1,5,4,4,3,2],"GoalColor":{"b":0,"g":255,"r":0},"MarkerColorMaxSegments":1,"StartPos":{"y":5,"x":1},"Size":{"y":10,"x":1}, "Time":20, "Steps":12}

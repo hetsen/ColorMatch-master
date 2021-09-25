@@ -1,0 +1,1 @@
+{"nColorsOnBoard":5,"Type":"OneStep","Name":"Sprinkles","Tile":[1,3,1,2,1,3,1,1,0,0,8,0,0,1,4,1,1,1,1,1,3,1,0,6,0,7,0,1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,0,1,1,1,1,1,0],"GoalColor":{"b":255,"g":0,"r":0},"MarkerColorMaxSegments":1,"StartPos":{"y":7,"x":4},"Size":{"y":7,"x":7}}

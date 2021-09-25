@@ -1,0 +1,1 @@
+{"nColorsOnBoard":5,"Type":"OneStep","Name":"Squeeze","Tile":[3,1,1,6,1,1,4,1,1,1,1,1,1,1,0,0,1,1,5,0,0,1,1,1,1,1,7,2,0,0,1,1,3,0,0,1,1,1,1,1,1,1,5,1,1,7,1,1,6],"GoalColor":{"b":0,"g":255,"r":255},"MarkerColorMaxSegments":2,"StartPos":{"y":4,"x":1},"Size":{"y":7,"x":7}, "Time":21, "Steps":20}

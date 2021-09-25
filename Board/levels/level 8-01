@@ -1,0 +1,1 @@
+{"nColorsOnBoard":6,"Type":"Default","Name":"Ship","Tile":[3,7,0,0,0,0,3,1,6,4,0,1,0,1,0,0,1,5,1,0,2,8,0,0,0],"GoalColor":{"b":255,"g":255,"r":255},"MarkerColorMaxSegments":1,"StartPos":{"y":2,"x":3},"Size":{"y":5,"x":5}}

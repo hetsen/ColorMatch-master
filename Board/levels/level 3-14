@@ -1,0 +1,1 @@
+{"nColorsOnBoard":6,"Type":"OneStep","Name":"Pi","Tile":[1,5,3,3,5,7,8,6,1,1,1,1,1,1,1,6,0,7,1,0,0,1,1,0,0,1,4,0,0,1,1,0,0,3,1,0,0,1,1,0,0,1,5,0,0,4,8,2],"GoalColor":{"b":255,"g":255,"r":0},"MarkerColorMaxSegments":2,"StartPos":{"y":1,"x":1},"Size":{"y":6,"x":8}, "Time":18, "Steps":16}

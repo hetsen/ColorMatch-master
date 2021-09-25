@@ -1,0 +1,1 @@
+{"nColorsOnBoard":2,"Type":"Default","Name":"Mean And Green","Tile":[0,0,1,3,7,0,0,1,0,0,5,1,1,1,1,7,0,1,0,0,2,0,6,6,4],"GoalColor":{"b":0,"g":255,"r":0},"MarkerColorMaxSegments":1,"StartPos":{"y":3,"x":3},"Size":{"y":5,"x":5}, "Time":23, "Steps":25}

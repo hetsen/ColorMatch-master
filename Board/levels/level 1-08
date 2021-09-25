@@ -1,0 +1,1 @@
+{"nColorsOnBoard":3,"Type":"Default","Name":"Loop","Tile":[8,3,5,4,0,0,0,4,0,0,8,0,0,0,5,0,0,1,0,0,0,3,6,1,1,1,8,5,0,0,0,1,0,0,4,0,0,0,7,0,0,3,0,0,0,3,5,4,2],"GoalColor":{"b":255,"g":255,"r":255},"MarkerColorMaxSegments":1,"StartPos":{"y":4,"x":4},"Size":{"y":7,"x":7}, "Time":16, "Steps":11}

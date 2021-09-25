@@ -1,0 +1,1 @@
+{"nColorsOnBoard":6,"Type":"OneStep","Name":"Reroute","Tile":[2,8,1,0,0,1,0,7,1,0,8,1,0,5,1,0,4,1,0,3,1,0,8,1,0,3,1,0,8,1,0,4,1,0,5,1,0,7,1,0,0,1,1,6,1],"GoalColor":{"b":255,"g":0,"r":255},"MarkerColorMaxSegments":2,"StartPos":{"y":15,"x":1},"Size":{"y":15,"x":3}}

@@ -1,0 +1,1 @@
+{"nColorsOnBoard":6,"Type":"Default","Name":"Knot","Tile":[0,0,2,0,0,5,6,3,4,8,1,0,0,7,0,0],"GoalColor":{"b":0,"g":255,"r":255},"MarkerColorMaxSegments":1,"StartPos":{"y":3,"x":3},"Size":{"y":4,"x":4}, "Time":13, "Steps":8}
