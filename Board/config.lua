@@ -1,7 +1,9 @@
 aspectRatio = (display.pixelWidth / display.pixelHeight)
+--[[
 print("Pixel width "..display.pixelWidth)
 print("Pixel height "..display.pixelHeight)
 print("Aspect ratio "..aspectRatio)
+]]--
 if aspectRatio < 0.6 then
     -- print('iPhone 5')
     _G.iphoneFive = true

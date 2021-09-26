@@ -8,7 +8,7 @@ local backdrop
 
 function scene:create(e)
 	params = e.params or {}
-	prev = composer.getSceneName("previous")()
+	prev = composer.getSceneName("previous")
 
 	sceneView = self.view
 
