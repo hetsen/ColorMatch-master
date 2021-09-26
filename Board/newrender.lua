@@ -555,9 +555,10 @@ function rend.drawBoard (data)
 
 			randomizer = rend.makerandom(base,base2)
 
-			tile[n] = display.newGroup()
-			tile[n].bottom = display.newImageRect (tile[n],level.imagelist[tType],32,38)
-			tile[n].top = display.newImageRect (tile[n],tileset[randomizer],32,38) 
+				tile[n] = display.newGroup()
+				tile[n].bottom = display.newImageRect (tile[n],level.imagelist[tType],32,38)
+				tile[n].top = display.newImageRect (tile[n],tileset[randomizer],32,38) 
+
 			
 	
 
@@ -583,42 +584,43 @@ function rend.drawBoard (data)
 
 
 			print ("rot "..randomrotation)
-			tile[n].top.rotation = randomrotation 
-			tile[n].top.x = xoffset
-			tile[n].top.y = yoffset
-			tile[n].x = (x-0.5) * tilesize 
-			tile[n].y = (y-0.5) * tilesize
-			tile[n].id = n
-			tile[n].xPos = x
-			tile[n].yPos = y
-			tile[n]:toFront()
-			tile[n].type = level.tile[n]
 
-			if tile[n].type == 0 then 
-				tile[n].isVisible = false
-			end 
+				tile[n].top.rotation = randomrotation 
+				tile[n].top.x = xoffset
+				tile[n].top.y = yoffset
+				tile[n].x = (x-0.5) * tilesize 
+				tile[n].y = (y-0.5) * tilesize
+				tile[n].id = n
+				tile[n].xPos = x
+				tile[n].yPos = y
+				tile[n]:toFront()
+				tile[n].type = level.tile[n]
 
-			group.tiles:insert(tile[n])
+				if tile[n].type == 0 then 
+					tile[n].isVisible = false
+				end 
 
-			if level.tile[n] == 2 then 
-				
-				tile[n].object = display.newGroup() 
+				group.tiles:insert(tile[n])
 
-				goal = display.newImageRect(tile[n].object,level.gate[1],128,128)
-				goal.alpha = 0 
-				lamp = display.newImageRect(tile[n].object,level.gate.lamp[1],128,128)
-				lamp.glow = display.newImageRect(tile[n].object,level.gate.lamp[2],128,128)
-				lamp.glow.alpha = .6 
-				goal.xScale, goal.yScale = 0.25, 0.25
-				lamp.xScale, lamp.yScale = 0.25, 0.25
-				lamp.glow.xScale, lamp.glow.yScale = 0.25, 0.25
+				if level.tile[n] == 2 then 
+					
+					tile[n].object = display.newGroup() 
 
-					tile[n].object.x = tile[n].x
-					tile[n].object.y = tile[n].y - 3
-					tile[n].object.color = tile[n].type
-				
-				group.tiles:insert(tile[n].object)
-			end 
+					goal = display.newImageRect(tile[n].object,level.gate[1],128,128)
+					goal.alpha = 0 
+					lamp = display.newImageRect(tile[n].object,level.gate.lamp[1],128,128)
+					lamp.glow = display.newImageRect(tile[n].object,level.gate.lamp[2],128,128)
+					lamp.glow.alpha = .6 
+					goal.xScale, goal.yScale = 0.25, 0.25
+					lamp.xScale, lamp.yScale = 0.25, 0.25
+					lamp.glow.xScale, lamp.glow.yScale = 0.25, 0.25
+
+						tile[n].object.x = tile[n].x
+						tile[n].object.y = tile[n].y - 3
+						tile[n].object.color = tile[n].type
+					
+					group.tiles:insert(tile[n].object)
+				end 
 
 			local function makeOneWayTile(direction, position)
 				local sheetdata={width = 128, height = 128, numFrames = 4, sheetContentWidth = 512, sheetContentHeight = 128}
@@ -640,55 +642,56 @@ function rend.drawBoard (data)
 				return otile
 			end
 
+	
+
+				if level.tile[n] >= 10 and level.tile[n] < 14 then
+					
+
+					tile[n].object = makeOneWayTile(rotationlist[level.tile[n]-9],n)
+					print ("state "..tile[n].object.state)
+					owi = owi + 1
+					--tile[n].object = display.newGroup() 
+					--oneway = display.newImageRect(tile[n].object,level.oneway[1],128,128)
+					
+					
 
 
-			if level.tile[n] >= 10 and level.tile[n] < 14 then
-				
-
-				tile[n].object = makeOneWayTile(rotationlist[level.tile[n]-9],n)
-				print ("state "..tile[n].object.state)
-				owi = owi + 1
-				--tile[n].object = display.newGroup() 
-				--oneway = display.newImageRect(tile[n].object,level.oneway[1],128,128)
-				
-				
-
-
-				--oneway.xScale, oneway.yScale = 0.20, 0.20
-				tile[n].object.x = tile[n].x
-				tile[n].object.y = tile[n].y - 3
-				group.tiles:insert(tile[n].object)
-				onewayID[owi] = owi 
-				print "one way tile"
-				print (owi)
-				
-			end 
-
-			if level.tile[n] > 1 and level.tile[n] ~= 2 and level.tile[n] < 10 then 
-				tile[n].object = display.newImageRect (level.itemlist[level.tile[n] ],22,22) 
+					--oneway.xScale, oneway.yScale = 0.20, 0.20
 					tile[n].object.x = tile[n].x
-					tile[n].object.y = tile[n].y 
-					tile[n].object.color = tile[n].type
-				
-				group.tiles:insert(tile[n].object)
-				
-
-
-				if level.tile[n] > 2 and level.tile[n] < 11 then 
-					if glow then 
-						tile[n].objectglow = display.newImageRect ("pics/glow.png",32,32)
-							tile[n].objectglow.x,tile[n].objectglow.y =  tile[n].object.x, tile[n].object.y
-							tile[n].objectglow:setFillColor(unpack (level.colorlist[level.tile[n] ]))
-							tile[n].objectglow.blendMode = "add"
-				
-						group.tiles:insert(tile[n].objectglow)
-					end 					
-				
+					tile[n].object.y = tile[n].y - 3
+					group.tiles:insert(tile[n].object)
+					onewayID[owi] = owi 
+					print "one way tile"
+					print (owi)
+					
 				end 
-			end
-			if level.tile[n] == 2 then 
-				goaltileID = n
-			end 
+
+				if level.tile[n] > 1 and level.tile[n] ~= 2 and level.tile[n] < 10 then 
+					tile[n].object = display.newImageRect (level.itemlist[level.tile[n] ],22,22) 
+						tile[n].object.x = tile[n].x
+						tile[n].object.y = tile[n].y 
+						tile[n].object.color = tile[n].type
+					
+					group.tiles:insert(tile[n].object)
+					
+
+
+					if level.tile[n] > 2 and level.tile[n] < 11 then 
+						if glow then 
+							tile[n].objectglow = display.newImageRect ("pics/glow.png",32,32)
+								tile[n].objectglow.x,tile[n].objectglow.y =  tile[n].object.x, tile[n].object.y
+								tile[n].objectglow:setFillColor(unpack (level.colorlist[level.tile[n] ]))
+								tile[n].objectglow.blendMode = "add"
+					
+							group.tiles:insert(tile[n].objectglow)
+						end 					
+					
+					end 
+				end
+				if level.tile[n] == 2 then 
+					goaltileID = n
+				end 
+
 		end 
 	
 
@@ -705,22 +708,22 @@ function rend.drawBoard (data)
 			 {name = "close",frames = {8,7,6,5,4,3,2,1},time = 500,loopCount = 1},
 			 }
 
---
 
-	spriteAnimation = display.newSprite(group.tiles,sheet, sequenceData)
-	spriteAnimation.x, spriteAnimation.y = tile[goaltileID].x,tile[goaltileID].y-3
-	spriteAnimation.xScale, spriteAnimation.yScale = ((goal.width*goal.xScale) / spriteAnimation.width), ((goal.height*goal.yScale) / spriteAnimation.height)
 
-	
+		spriteAnimation = display.newSprite(group.tiles,sheet, sequenceData)
+		spriteAnimation.x, spriteAnimation.y = tile[goaltileID].x,tile[goaltileID].y-3
+		spriteAnimation.xScale, spriteAnimation.yScale = ((goal.width*goal.xScale) / spriteAnimation.width), ((goal.height*goal.yScale) / spriteAnimation.height)
+		
+		
 
-	tile[goaltileID].object:toFront()
+		tile[goaltileID].object:toFront()
 
-	touchTile = display.newImageRect(data.touchtile,32,32)
-	touchTile.blendMode = "add"
-	touchTile.alpha = 0 
-	group.tiles:insert(touchTile)	
+		touchTile = display.newImageRect(data.touchtile,32,32)
+		touchTile.blendMode = "add"
+		touchTile.alpha = 0 
+		group.tiles:insert(touchTile)	
 
-	marker = display.newGroup()
+		marker = display.newGroup()
 
 		marker.blob = display.newImageRect(marker, "pics/marker.png",25,25 )
 		marker.x = (level.marker.x-0.5) * tilesize
@@ -729,36 +732,36 @@ function rend.drawBoard (data)
 		marker:addEventListener("tap",plusMinus)
 		marker.eye={}
 
-	for i = 1,2 do 
-		marker.eye[i] = display.newImageRect(marker,"Graphics/Objects/eye_sclera.png" ,70,70)
-		marker.eye[i].dot = display.newImageRect(marker,"Graphics/Objects/eye_pupil.png", 6,6)
+		for i = 1,2 do 
+			marker.eye[i] = display.newImageRect(marker,"Graphics/Objects/eye_sclera.png" ,70,70)
+			marker.eye[i].dot = display.newImageRect(marker,"Graphics/Objects/eye_pupil.png", 6,6)
+			
+			marker.eye[i].yScale = .1
+			marker.eye[i].xScale = .1
+			
+			marker.eye[i]:setFillColor(255,255,255)
+			marker.eye[i].dot:setFillColor(0,0,0)
+
+			marker.eye[i].y = -1
+			marker.eye[i].dot.y = -2
+			marker.eye[i]:toFront()
+			marker.eye[i].dot:toFront()
 		
-		marker.eye[i].yScale = .1
-		marker.eye[i].xScale = .1
-		
-		marker.eye[i]:setFillColor(255,255,255)
-		marker.eye[i].dot:setFillColor(0,0,0)
+		end
+			marker.eye[1].x = -3.6
+			marker.eye[2].x = 3.6
+			marker.eye[1].dot.x = -3.6
+			marker.eye[2].dot.x = 3.6
 
-		marker.eye[i].y = -1
-		marker.eye[i].dot.y = -2
-		marker.eye[i]:toFront()
-		marker.eye[i].dot:toFront()
-	
-	end
-		marker.eye[1].x = -3.6
-		marker.eye[2].x = 3.6
-		marker.eye[1].dot.x = -3.6
-		marker.eye[2].dot.x = 3.6
-
-	group.tiles:insert(marker)
+		group.tiles:insert(marker)
 	
 
 	
-	group.tiles.xScale = groupscaling
-	group.tiles.yScale = groupscaling
-	group.tiles:setReferencePoint(display.CenterReferencePoint)
-	group.tiles.x = _W/2 - 15
-	group.tiles.y = _H/2
+		group.tiles.xScale = groupscaling
+		group.tiles.yScale = groupscaling
+		group.tiles:setReferencePoint(display.CenterReferencePoint)
+		group.tiles.x = _W/2 - 15
+		group.tiles.y = _H/2
 
 	if longscreen then group.pan.yScale = .84 
 						
@@ -798,7 +801,7 @@ function rend.drawBoard (data)
 
 	return tile
 end
-
+end
 function rend.opentiles(tile, state)
 	tile.object.state = state
 	tile.object:setSequence( state )
@@ -1022,24 +1025,24 @@ function rend.cleanup(argument)
 		
 		transition.to (group.tiles, {time = 300, alpha = 0, onComplete = function ()
 		animate = false 
-		for i = 1,#tile do 
-			if tile[i].object ~= nil then 
-				display.remove (tile[i].object)
-				tile[i].object = nil 
-				
-				if glow then 
-					if tile[i].type ~= 2 then 
-						display.remove (tile[i].objectglow)
-						tile[i].objectglow=nil
+			for i = 1,#tile do 
+				if tile[i].object ~= nil then 
+					display.remove (tile[i].object)
+					tile[i].object = nil 
+					
+					if glow then 
+						if tile[i].type ~= 2 then 
+							display.remove (tile[i].objectglow)
+							tile[i].objectglow=nil
+						end 
 					end 
+				
 				end 
-			
-			end 
-			display.remove (tile[i].bottom)
-			display.remove (tile[i].top)
-			display.remove (tile[i])
-			--print ("removing "..tostring(tile[i]))
-		end
+				display.remove (tile[i].bottom)
+				display.remove (tile[i].top)
+				display.remove (tile[i])
+				--print ("removing "..tostring(tile[i]))
+			end
 		tile = nil 
 		display.remove (group.tiles)
 		cleaningUp = false

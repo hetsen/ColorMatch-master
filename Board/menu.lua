@@ -178,16 +178,19 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 			success = true 
 			
 				if p.menu == 1 then 
-					doc_path 		= system.pathForFile( system.ResourceDirectory )
+					doc_path 		= system.pathForFile( "",system.DocumentsDirectory )
+					--doc_path 		= system.pathForFile( system.ResourceDirectory )
 					usermode = false
+					print("ResourceDirectory/New DocumentsDirectory")
 				end
 
 				if p.menu == 2 then 
 					doc_path 		= system.pathForFile( "",system.DocumentsDirectory )
 					usermode = true 
+					print("DocumentsDirectory")
 				end
 
-				print ("PATH"..doc_path)
+				--print ("PATH"..doc_path)
 
 			
 
@@ -212,14 +215,19 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 		                    			if worldName == nil
 		                    			or (string.sub(file, 1, #worldName) ==  worldName)
 		                    			or (string.sub(file, 1, 5) == 'level' and worldName == 'Find the Cure') then
-		                    	
+
+		                    				--table.sort()
 				                    		num = num + 1
 				                    		levelList[num] = file
+
+				                    		print("horsecock "..file)
 				                    	
 				                    	elseif p.menu == 2 then 
 				                    	
 				                    		num = num + 1
 				                    		levelList[num] = file
+				                    		print("horsecockTwo "..file)
+
 				                    	
 				                    	end 
 
@@ -230,7 +238,10 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 		        		end
 		    		end
 		    	end 
-	    		
+        		table.sort(levelList, function(a, b) return a < b end) -- sort by date of change
+	    		for i=1,#levelList do
+	    			print("New list "..levelList[i])
+	    		end
 	    		return levelList
 	    		
 		end 
@@ -758,10 +769,10 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 		
 
 			if p.menu == 1 then 
-				gameboard= tenflib.jsonLoad( "levels/"..level, system.ResourceDirectory )
+				gameboard= tenflib.jsonLoad( "levels/"..level, system.DocumentsDirectory )
 
 			else
-				gameboard= tenflib.jsonLoad( "levels/"..level, system.DocumentsDirectory )
+				gameboard = tenflib.jsonLoad( "levels/"..level, system.DocumentsDirectory )
 
 			end
 		
@@ -866,7 +877,8 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 					--return false
 				end
 
-				return a.DateTime < b.DateTime
+				--return a.DateTime < b.DateTime
+				return a < b
 			end
 
 			local tmpList = {}
@@ -881,6 +893,7 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 
 			for k,v in pairs(tmpList) do
 				levelList[#levelList+1] = v.Name
+
 			end
 
 			listoflevelsplayed = tenflib.jsonLoad("stateuser.txt",system.DocumentsDirectory)

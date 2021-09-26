@@ -4,7 +4,7 @@ local scene 			= composer.newScene()
 function scene:create(e)
 	params = e.params
 	print (params.level)
-	prev = composer.getSceneName()
+	prev = composer.getSceneName("previous")
 	print('Prev: ', prev)
 	print "emptyscene!"
 	if prev then 

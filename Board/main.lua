@@ -1,4 +1,60 @@
-f--function print() end
+--function print() end
+
+--[[ Filthy damn anodrid level fix ]]
+local lfs = require( "lfs" )
+path = system.pathForFile( nil, system.DocumentsDirectory )
+checkDir = lfs.chdir(system.pathForFile("levels", system.DocumentsDirectory))
+if checkDir then
+    
+else
+    success = lfs.chdir( path )
+    if success then 
+        lfs.mkdir( "levels" )
+    end
+end
+
+t =  {"level 1-01","level 1-02","level 1-03","level 1-04","level 1-05","level 1-06","level 1-07","level 1-08","level 1-09","level 1-10","level 1-11","level 1-12","level 1-13","level 1-14","level 1-15","level 1-16","level 2-01","level 2-02","level 2-03","level 2-04","level 2-05","level 2-06","level 2-07","level 2-08","level 2-09","level 2-10","level 2-11","level 2-12","level 2-13","level 2-14","level 2-15","level 2-16","level 3-01","level 3-02","level 3-03","level 3-04","level 3-05","level 3-06","level 3-07","level 3-08","level 3-09","level 3-10","level 3-11","level 3-12","level 3-13","level 3-14","level 3-15","level 3-16","level 4-01","level 4-02","level 4-03","level 4-04","level 4-05","level 4-06","level 4-07","level 4-08","level 4-09","level 4-10","level 4-11","level 4-12","level 4-13","level 4-14","level 4-15","level 4-16","level 5-01","level 5-02","level 5-03","level 5-04","level 5-05","level 5-06","level 5-07","level 5-08","level 5-09","level 5-10","level 5-11","level 5-12","level 5-13","level 5-14","level 5-15","level 5-16","level 6-01","level 6-02","level 6-03","level 6-04","level 6-05","level 6-06","level 6-07","level 6-08","level 6-09","level 6-10","level 6-11","level 6-12","level 6-13","level 6-14","level 6-15","level 6-16","level 7-01","level 7-02","level 7-03","level 7-04","level 7-05","level 7-06","level 7-07","level 7-08","level 7-09","level 7-10","level 7-11","level 7-12","level 7-13","level 7-14","level 7-15","level 7-16","level 8-01","level 8-02","level 8-03","level 8-04","level 8-05","level 8-06","level 8-07","level 8-08","level 8-09","level 8-10","level 8-11","level 8-12","level 8-13","level 8-14","level 8-15","level 8-16"}
+
+function networkListener( event )
+    if ( event.isError ) then
+        print( "Network error: ", event.response )
+        elseif ( event.phase == "began" ) then
+            if ( event.bytesEstimated <= 0 ) then
+                print( "Download starting, size unknown" )
+            else
+                print( "Download starting, estimated size: " .. event.bytesEstimated )
+            end
+         
+        elseif ( event.phase == "progress" ) then
+            if ( event.bytesEstimated <= 0 ) then
+                print( "Download progress: " .. event.bytesTransferred )
+            else
+                print( "Download progress: " .. event.bytesTransferred .. " of estimated: " .. event.bytesEstimated )
+            end
+         
+        elseif ( event.phase == "ended" ) then
+            print( "Download complete, total bytes transferred: " .. event.bytesTransferred )
+    end
+end
+
+for i=1,#t do
+    levelFile = system.pathForFile( "levels/"..t[i], system.DocumentsDirectory )
+    fh, reason = io.open( levelFile, "r" )
+    if fh then
+        io.close( fh )
+        print( levelFile.." exists!" )
+    else
+        local params = {}
+        params.progress = "download"
+        params.response = {
+            filename = "levels/"..t[i],
+            baseDirectory = system.DocumentsDirectory
+        }
+        network.request( "https://creftan.com/idiot/levels/"..t[i], "GET", networkListener,  params )
+    end
+end
+--[[ END  Filthy damn anodrid level fix ]]
+
 
 display.setStatusBar(display.HiddenStatusBar)
 local composer 	= require "composer"

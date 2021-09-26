@@ -146,15 +146,19 @@ function hud.createHud(GameBoard,group)
 	holderUntap:addEventListener("touch",function()
 		return true
 	end)
-	--[[
+	
 	thatReturnTrueRect = display.newRect(0,0,_W,_H)
-	thatReturnTrueRect:addEventListener("touch",hud.returntrue)
-	thatReturnTrueRect:addEventListener("tap",hud.returntrue)
-	thatReturnTrueRect.alpha = 0.02
-	timer.performWithDelay(500,function()
-		thatReturnTrueRect.alpha = 0
+
+	thatReturnTrueRect.alpha = 0.5
+	transition.to(thatReturnTrueRect, {time=100, alpha=0})
+	timer.performWithDelay(100,function()
+
+		thatReturnTrueRect.alpha = 0.0
+		thatReturnTrueRect.x = _W
+		thatReturnTrueRect:addEventListener("touch",hud.returntrue)
+		thatReturnTrueRect:addEventListener("tap",hud.returntrue)
 	end)
-	]]--
+	
 	colorHolder:toBack()
 	colorHolder.x = _W*.5
 	colorHolder.y = colorHolder.y + 40
@@ -397,7 +401,7 @@ function hud.createHud(GameBoard,group)
 
 	mainMenuGroup:insert(foregroundGroup)
 	foregroundGroup.x = -155
-	foregroundGroup.y = _W*0.2
+	foregroundGroup.y = _W*0.1
 
 
 	menuBox = display.newImageRect(mainMenuGroup,"Graphics/Menu/menu_backdrop.png", 1032, 1032)
@@ -989,7 +993,7 @@ function hud.nilItAll()
 	if params.worldName then
 		tenflib.jsonSave('theWorld', {params.worldName})
 	end
-	theWorld = tenflib.jsonLoad('theWorld')
+	theWorld = tenflib.jsonLoad('theWorld',system.DocumentsDirectory)
 	
 	-- print("This is it: "..theWorld[1])
 	if theWorld[1] == "Find the Cure" then
@@ -1036,10 +1040,6 @@ function hud.dontFail()
 	end)
 end
 
-
-
-	aud.play(sounds.sweep)
-
-
+aud.play(sounds.sweep)
 
 return hud
