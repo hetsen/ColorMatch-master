@@ -1,2 +1,2 @@
-local storyboard = require 'storyboard'
-storyboard.gotoScene('editor')
+local composer = require 'composer'
+composer.gotoScene('editor')

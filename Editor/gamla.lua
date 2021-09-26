@@ -1,7 +1,7 @@
-local storyboard = require 'storyboard'
-local scene = storyboard.newScene()
+local composer = require 'composer'
+local scene = composer.newScene()
 
-function scene:enterScene(e)
+function scene:create(e)
 	
 display.setStatusBar(display.HiddenStatusBar)
 local json = require 'json'
@@ -474,14 +474,14 @@ createColors()
 
 end
 
-function scene:createScene(e) end
-function scene:exitScene(e) end
-function scene:destroyScene(e) end
+function scene:show(e) end
+function scene:hide(e) end
+function scene:destroy(e) end
 
-scene:addEventListener('createScene', scene)
-scene:addEventListener('enterScene', scene)
-scene:addEventListener('exitScene', scene)
-scene:addEventListener('destroyScene', scene)
+scene:addEventListener("create",scene)
+scene:addEventListener("show",scene)
+scene:addEventListener("hide",scene)
+scene:addEventListener("destroy",scene)
 
 return scene
 
