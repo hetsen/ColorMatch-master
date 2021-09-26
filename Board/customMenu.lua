@@ -9,7 +9,7 @@ function scene:create(e)
 	local filesList = {}
 	local sceneView = self.view
 
-	local prev = composer.getSceneName("previous")()
+	local prev = composer.getSceneName("previous")
 
 	if prev then
 		composer.removeScene(prev)

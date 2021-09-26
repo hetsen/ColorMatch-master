@@ -172,13 +172,21 @@ function scene:create(e)
 
 			for i = 1, #worlds do
 				world = display.newGroup()
-
+				bgTxt = display.newImageRect( world, "Graphics/Menu/large_btn_texture.png", 768, 190 )
+				bgTxt.xScale, bgTxt.yScale = .3, .3
+				bgTxt.x, bgTxt.y = 0, 0
+				bgFill = display.newImageRect( world, "Graphics/Menu/large_btn_fill.png", 768, 190 )
+				bgFill:setFillColor(0,128,0)
+				bgFill.x, bgFill.y = 0, 0
+				bgFill.xScale, bgFill.yScale = .3, .3
+				--[[
 				bg = display.newRoundedRect(world, 0, 0, _W*0.75, height, 10)
 				bg.x, bg.y = 0, 0
 				bg:setFillColor(0,128,0) -- Temporärt. Ska vara bild.
 				bg:setStrokeColor(0)
 				bg.strokeWidth = 2
-
+				]]--
+				
 				fg = display.newText(world, worlds[i], 0, 0, systemfont, _G.mediumFontSize)
 				fg.x, fg.y = 0, 0
 
@@ -188,8 +196,9 @@ function scene:create(e)
 				if _G.worldsUnlocked[worlds[i]] then
 					world:addEventListener('tap', onTap)
 
-					local info = display.newRoundedRect(world, 0, 0, bg.width*0.1, bg.height*0.4, bg.width*0.02)
-					info.x, info.y = bg.width*0.5*bg.xScale - info.width*0.5 - 8, 0
+					local info = display.newRoundedRect(world, 0, 0, bgFill.width*0.04, bgFill.height*0.15, bgFill.width*0.005)
+					info.alpha = 0.5
+					info.x, info.y = bgFill.width*0.5*bgFill.xScale - info.width*0.5 - 8, 0
 					info.worldName = worlds[i]
 					info:addEventListener('tap', onInfoTap)
 				else

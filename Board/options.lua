@@ -185,7 +185,7 @@ function scene:create(event)
 	local producedBy = display.newText(tenfingersBadge, 'Developed by', 0, 0, systemfont, _G.mediumSmallFontSize)
 	producedBy.y = producedBy.height*producedBy.yScale*0.45
 
-	local badge = display.newImageRect(tenfingersBadge, 'Graphics/Logo/logotyp_10F_inverted_small.png', 381, 116)
+	local badge = display.newImageRect(tenfingersBadge, 'Graphics/Logo/logotyp_1F_inverted.png', 381, 116)
 	badge.x, badge.y = 0, producedBy.height*producedBy.yScale*0.45 + badge.height*badge.yScale*0.25
 	badge.xScale, badge.yScale = 0.4, 0.4
 

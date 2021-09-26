@@ -45,7 +45,7 @@ local sheet
 local sequenceData
 local spriteAnimation
 local oldrand2
-local rubberpan = false
+local rubberpan = true
 local autocam = (tenflib.jsonLoad('autoScroll') or {true})[1]
 local rotationlist = {0,90,180,270}
 
@@ -801,7 +801,7 @@ function rend.drawBoard (data)
 
 	return tile
 end
-end
+
 function rend.opentiles(tile, state)
 	tile.object.state = state
 	tile.object:setSequence( state )

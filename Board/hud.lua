@@ -282,8 +282,8 @@ function hud.createHud(GameBoard,group)
 	]]--
 
 	local sliders = {}
-	local music = tenflib.jsonLoad("music.txt")
-	local sound = tenflib.jsonLoad("sound.txt")
+	local music = tenflib.jsonLoad("music")
+	local sound = tenflib.jsonLoad("sound")
 	local foregroundGroup = display.newGroup()
 	function sliderFunc(e)
 		local volume = e.target.x *0.0071428571428571
@@ -317,9 +317,9 @@ function hud.createHud(GameBoard,group)
 		elseif e.phase == "ended" then 
 			display.getCurrentStage():setFocus(nil)
 			if e.target.name == 'music' then
-				tenflib.jsonSave( "music.txt", {music=volume})
+				tenflib.jsonSave( "music", {music=volume})
 			else
-				tenflib.jsonSave( "sound.txt", {sound=volume})
+				tenflib.jsonSave( "sound", {sound=volume})
 			end
 		end
 

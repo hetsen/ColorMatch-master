@@ -200,8 +200,7 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 				if success then
 		    			lfs.mkdir("levels")
 		    			new_folder_path = lfs.currentdir() .. "/levels"
-					
-				
+	
 				end
 
 				for file in lfs.dir(new_folder_path) do
@@ -227,11 +226,7 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 				                    		num = num + 1
 				                    		levelList[num] = file
 				                    		print("horsecockTwo "..file)
-
-				                    	
 				                    	end 
-
-
 		                			end 
 		                		end
 		            		end
@@ -877,8 +872,8 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 					--return false
 				end
 
-				--return a.DateTime < b.DateTime
-				return a < b
+				return a.DateTime < b.DateTime
+				
 			end
 
 			local tmpList = {}
