@@ -866,10 +866,10 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 				-- 	print(k,v)
 				-- end
 
-				if not a.DateTime then
-					--return true
-				elseif not b.DateTime then
-					--return false
+				if a.DateTime == nil then
+					return true
+				elseif b.DateTime then
+					return false
 				end
 
 				return a.DateTime < b.DateTime
