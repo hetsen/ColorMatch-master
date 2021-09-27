@@ -868,7 +868,7 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 
 				if a.DateTime == nil then
 					return true
-				elseif b.DateTime then
+				elseif b.DateTime == nil then
 					return false
 				end
 
