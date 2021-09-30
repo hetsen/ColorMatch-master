@@ -1,13 +1,11 @@
 local composer 	= require "composer"
-local scene 		= composer.newScene()
-local aud 			= require 'audioo'
+local scene 	= composer.newScene()
+local aud 		= require 'audioo'
 
 local backdrop
 
 function scene:create(e)
 	params = e.params
-	local filesList = {}
-	local sceneView = self.view
 
 	local mainFrameGroup = display.newGroup()
 
@@ -18,7 +16,7 @@ function scene:create(e)
 	local backButton
 
 	backdrop = require 'background'
-	sceneView:insert(backdrop)
+	self.view:insert(backdrop)
 	
 	Runtime:addEventListener("enterFrame", backdrop.animateglow)
 
@@ -37,14 +35,48 @@ function scene:create(e)
 		end
 
 		aud.play(sounds.sweep)
-		transition.to(backdrop, {time = time or 150, alpha = 0, transition = easing.inOutQuad})
-		transition.to(mainFrameGroup, {time = time or 150, y = _H*1.2, alpha = 0, transition = easing.inOutQuad, onComplete = function()
-			callback(e)
-		end})
+		
+		transition.to(
+			backdrop,
+			{
+				time = time or 150,
+				alpha = 0,
+				transition = easing.inOutQuad
+			}
+		)
+		
+		transition.to(
+			mainFrameGroup,
+			{
+				time = time or 150,
+				y = _H*1.2,
+				alpha = 0,
+				transition = easing.inOutQuad,
+				onComplete = function()
+					callback(e)
+				end
+			}
+		)
 	end
 
 	local function gotoTutorial(e)
 		composer.gotoScene('tutorial', {params = {tutorial = e.target.path}})
+	end
+	
+	local function createLayer(path, color, width)
+		local layer = {}
+		
+		layer.path = path
+		layer.width = width or 768
+		layer.height = 190
+		layer.xScale, layer.yScale = 0.25, 0.25
+		layer.x, layer.y = 0, 0
+		
+		if( color ~= nil) then
+			layer.color = color
+		end
+		
+		return layer
 	end
 
 	function tapTutorial(e)
@@ -66,22 +98,10 @@ function scene:create(e)
 		end
 
 		for i = 1, #listOfTutorials do
-			local tutorialButton = {}--display.newGroup()
+			local tutorialButton = {} --display.newGroup()
 
-			local bg = {}
-			bg.path = 'Graphics/Menu/large_btn_fill.png'
-			bg.width = 768
-			bg.height = 190
-			bg.xScale, bg.yScale = 0.25, 0.2
-			bg.x, bg.y = 0, 0
-			bg.color = {0, 255, 0}
-
-			local fg = {}
-			fg.path = 'Graphics/Menu/large_btn_texture.png'
-			fg.width = 768
-			fg.height = 190
-			fg.xScale, fg.yScale = 0.25, 0.2
-			fg.x, fg.y = 0, 0
+			local bg = createLayer('Graphics/Menu/large_btn_fill.png', {0, 255, 0}, nil)
+			local fg = createLayer('Graphics/Menu/large_btn_texture.png', nil, nil)
 
 			local text = {}
 			text.text = listOfTutorials[i].name
@@ -127,29 +147,14 @@ function scene:create(e)
 
 	backButton = {}--display.newGroup()
 
-	local bg = {}--display.newImageRect(backButton, 'Graphics/Menu/small_btn_fill.png', 384, 190)
-	bg.path = 'Graphics/Menu/small_btn_fill.png'
-	bg.width = 384
-	bg.height = 190
-	bg.xScale, bg.yScale = 0.25, 0.25
-	bg.x, bg.y = 0, 0
-	bg.color = _G.continueColor
-
-	local fg = {}--display.newImageRect(backButton, 'Graphics/Menu/small_btn_texture.png', 384, 190)
-	fg.path = 'Graphics/Menu/small_btn_texture.png'
-	fg.width = 384
-	fg.height = 190
-	fg.xScale, fg.yScale = 0.25, 0.25
-	fg.x, fg.y = 0, 0
-
 	local text = {}--display.newText(backButton, 'Back', 0, 0, systemfont, _G.mediumFontSize)
 	text.text = 'Back'
 	text.font = systemfont
 	text.fontSize = _G.mediumFontSize
 	text.x, text.y = 0, 0
 
-	backButton.bg = bg
-	backButton.fg = fg
+	backButton.bg = createLayer('Graphics/Menu/small_btn_fill.png', _G.continueColor, 384)
+	backButton.fg = createLayer('Graphics/Menu/small_btn_texture.png', nil, 384)
 	backButton.text = text
 
 	backButton.x, backButton.y = _W*0.7, _H*0.8
@@ -160,18 +165,25 @@ function scene:create(e)
 	backButton = createButton(backButton)
 	mainFrameGroup:insert(backButton)
 
-	sceneView:insert(mainFrameGroup)
+	self.view:insert(mainFrameGroup)
 end
 
-function scene:show(e)end 
+function scene:show(e)
+
+end 
+
 function scene:hide(e)
 	Runtime:removeEventListener("enterFrame", backdrop.animateglow)
 	package.loaded['background'] = nil
-end 
-function scene:destroy(e)end
+end
+
+function scene:destroy(e)
+
+end
 
 scene:addEventListener("create",scene)
 scene:addEventListener("show",scene)
 scene:addEventListener("hide",scene)
 scene:addEventListener("destroy",scene)
+
 return scene
