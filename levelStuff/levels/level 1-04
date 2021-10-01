@@ -1,0 +1,1 @@
+{"nColorsOnBoard":4,"Type":"Default","Name":"Sai","Tile":[0,0,2,0,0,0,0,4,0,0,0,0,4,0,0,0,0,4,0,0,0,0,4,0,0,7,0,4,0,8,7,0,4,0,8,7,7,1,8,8,0,0,5,0,0,0,0,5,0,0,0,0,5,0,0],"GoalColor":{"b":0,"g":0,"r":255},"MarkerColorMaxSegments":2,"StartPos":{"y":8,"x":3},"Size":{"y":11,"x":5}, "Time":28, "Steps":26}

@@ -1,0 +1,1 @@
+{"nColorsOnBoard":5,"Type":"OneStep","Name":"Full","Tile":[1,8,8,4,6,6,4,7,6,8,7,5,8,4,4,4,6,7,5,2],"GoalColor":{"b":0,"g":0,"r":255},"MarkerColorMaxSegments":1,"StartPos":{"y":1,"x":1},"Size":{"y":4,"x":5}, "Time":15, "Steps":9}

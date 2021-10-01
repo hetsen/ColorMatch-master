@@ -1,0 +1,1 @@
+{"nColorsOnBoard":5,"Type":"Default","Name":"Tricky","Tile":[3,7,1,1,1,0,0,1,0,1,4,6,5,0,1,0,0,0,6,1,2,5,7,1,1],"GoalColor":{"b":0,"g":255,"r":255},"MarkerColorMaxSegments":1,"StartPos":{"y":3,"x":5},"Size":{"y":5,"x":5}, "Time":18, "Steps":28}

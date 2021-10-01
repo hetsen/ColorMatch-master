@@ -1,0 +1,1 @@
+{"nColorsOnBoard":6,"Type":"OneStep","Name":"Forward","Tile":[0,0,0,0,0,6,2,0,5,1,1,1,1,4,0,1,4,0,0,1,0,0,1,0,0,0,1,0,0,1,0,0,3,1,0,8,1,1,1,1,5,0,1,7,0,0,0,0,0],"GoalColor":{"b":0,"g":0,"r":255},"MarkerColorMaxSegments":2,"StartPos":{"y":7,"x":1},"Size":{"y":7,"x":7}, "Time":14, "Steps":12}
