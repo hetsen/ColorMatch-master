@@ -316,7 +316,7 @@ return function(parent, saLeft, saTop, saWidth, saHeight, pageWidth, pageHeight,
 		scroller.anchorX = 0
 		scroller.anchorY = 0
 	end
-	tenfLib.setAttr(scroller, methods):setFillColor(0/255,0/255,0/255)
+	tenfLib.setAttr(scroller, methods):setFillColor(0,0,0)
 	tenfLib.setAttr(scroller, methods).alpha = .1
 
 	scroller[k] = {
