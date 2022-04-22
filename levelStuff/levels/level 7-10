@@ -1,0 +1,1 @@
+{"nColorsOnBoard":6,"Type":"Default","Name":"Chain Reaction","Tile":[1,1,0,6,8,0,1,1,1,0,7,3,0,5,3,0,1,5,1,0,4,7,0,5,2],"GoalColor":{"b":0,"g":255,"r":255},"MarkerColorMaxSegments":1,"StartPos":{"y":1,"x":1},"Size":{"y":5,"x":5}}

@@ -1,0 +1,1 @@
+{"nColorsOnBoard":3,"Type":"Default","Name":"Dagger","Tile":[0,0,0,4,0,0,0,0,0,0,4,0,0,0,0,0,0,8,0,0,0,0,3,7,1,7,3,0,0,0,0,6,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0],"GoalColor":{"b":255,"g":0,"r":255},"MarkerColorMaxSegments":1,"StartPos":{"y":4,"x":4},"Size":{"y":7,"x":7}, "Time":17, "Steps":15}

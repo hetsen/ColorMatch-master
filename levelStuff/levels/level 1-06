@@ -1,0 +1,1 @@
+{"nColorsOnBoard":3,"Type":"Default","Name":"Money Talks","Tile":[0,0,0,3,0,0,0,1,1,1,1,1,1,1,8,0,0,7,0,0,0,1,1,1,1,1,1,1,0,0,0,6,0,0,8,2,1,1,1,1,1,1,0,0,0,4,0,0,0],"GoalColor":{"b":0,"g":255,"r":255},"MarkerColorMaxSegments":1,"StartPos":{"y":2,"x":7},"Size":{"y":7,"x":7}, "Time":24, "Steps":27}

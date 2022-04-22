@@ -1,0 +1,1 @@
+{"nColorsOnBoard":5,"Type":"Default","Name":"Bird","Tile":[0,4,7,2,1,6,5,0,4,3,1,0,7,0,0,0],"GoalColor":{"b":0,"g":255,"r":255},"MarkerColorMaxSegments":1,"StartPos":{"y":2,"x":1},"Size":{"y":4,"x":4}, "Time":16, "Steps":14}

@@ -1,0 +1,1 @@
+{"nColorsOnBoard":3,"Type":"Default","Name":"Hieroglyph","Tile":[0,0,5,3,2,5,1,4,0,0,0,0,1,0,0,6,7,8,0,0,3,0,0,0,0],"GoalColor":{"b":0,"g":255,"r":0},"MarkerColorMaxSegments":1,"StartPos":{"y":3,"x":3},"Size":{"y":5,"x":5}, "Time":27, "Steps":23}
