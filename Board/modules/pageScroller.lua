@@ -137,7 +137,7 @@ end
 
 
 function focusBeganHandler(e)
-	print("BEGAN!!!!!")
+	----print("BEGAN!!!!!")
 	local scroller = e.target
 	local data = scroller[k]
 	if data.movingStarted then
@@ -153,7 +153,7 @@ end
 
 
 function focusMovedHandler(e)
-	print("MOVED!!!!!")
+	--print("MOVED!!!!!")
 	local scroller = e.target
 	local data = scroller[k]
 	if not data.movingStarted and tenfLib.pointDist(e.x, e.y, e.xStart, e.yStart) > deadZoneR then
@@ -179,7 +179,7 @@ end
 
 
 function focusEndedHandler(e)
-	print("ENDED!!!!!")
+	--print("ENDED!!!!!")
 	local scroller = e.target
 	local data = scroller[k]
 	if data.movingStarted then
@@ -218,7 +218,7 @@ function focusEndedHandler(e)
 		-- local time
 		-- if xDist > yDist then
 		-- 	time = (300+400*math.max(xDist-1, 0))/(math.abs(data.xSpeed)/200+1)
-		-- 	print(math.abs(data.xSpeed), time)
+		-- 	--print(math.abs(data.xSpeed), time)
 		-- else
 		-- end
 		--
@@ -306,12 +306,18 @@ return function(parent, saLeft, saTop, saWidth, saHeight, pageWidth, pageHeight,
 
 
 	local scroller
+	-- anchor fix for pageScroller, don't mess with this shit tyty!
 	if parent then
 		scroller = display.newRect(parent, saLeft, saTop, saWidth, saHeight)
+		scroller.anchorX = 0
+		scroller.anchorY = 0
 	else
 		scroller = display.newRect(saLeft, saTop, saWidth, saHeight)
+		scroller.anchorX = 0
+		scroller.anchorY = 0
 	end
-	tenfLib.setAttr(scroller, methods):setFillColor(0, 0)
+	tenfLib.setAttr(scroller, methods):setFillColor(0/255,0/255,0/255)
+	tenfLib.setAttr(scroller, methods).alpha = .1
 
 	scroller[k] = {
 		continousScrolling = continousScrolling,
