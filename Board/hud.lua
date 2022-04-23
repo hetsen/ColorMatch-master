@@ -373,18 +373,17 @@ function hud.createHud(GameBoard,group)
 		sliderMenuBox.y = 215
 		-- print("goes here")
 	end	
-	local soundText = display.newText(foregroundGroup, 'Music', 0, 0, systemfont, _G.mediumFontSize)
-	soundText.x, soundText.y = _W*0.2, _H*0.22
+	local soundText = display.newText(foregroundGroup, 'Sound', 0, 0, systemfont, _G.mediumFontSize)
+	soundText.x, soundText.y = _W*0.2, _H*0.2
 
-	local soundMusicText = display.newText(foregroundGroup, 'Sound', 0, 0, systemfont, _G.mediumFontSize)
-	soundMusicText.x, soundMusicText.y = _W*0.2, _H*0.31
-
+	local soundMusicText = display.newText(foregroundGroup, 'Music', 0, 0, systemfont, _G.mediumFontSize)
+	soundMusicText.x, soundMusicText.y = _W*0.2, soundText.y+40
+	
 	local soundSlider = createSlider('sound')
-	soundSlider.x, soundSlider.y = _W*0.35, _H*0.230
-
-
+	soundSlider.x, soundSlider.y = soundText.x + 50, soundText.y
+	
 	local musicSlider = createSlider('music')
-	musicSlider.x, musicSlider.y = _W*0.35, _H*0.320
+	musicSlider.x, musicSlider.y = soundMusicText.x + 50, soundMusicText.y
 	
 
 	

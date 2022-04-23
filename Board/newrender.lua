@@ -36,6 +36,7 @@ local randomcounter = 0
 local phone 		= true
 local marker
 local backg
+local bgCreated 	= false
 local animbg =  true 
 local onewayID = {}
 local owi = 0 
@@ -96,21 +97,27 @@ function pan(e)
 
 				if group.pan.y > 0 then
 					tempYP = true
-					print "y more than 0"
+					if _G.debugmode then
+						print "y more than 0"
+					end
 					distFromEdgeY = (group.pan.y + Yoffset) - (boundsCircleY.y + boundsCircleY.width/2)
 				else
-					print "y less than 0"
+					if _G.debugmode then
+						print "y less than 0"
+					end
 					tempYP = false
 					distFromEdgeY = ((boundsCircleY.y - boundsCircleY.contentWidth/2) - (group.pan.y+Yoffset)) - (boundsCircleY.y + boundsCircleY.contentWidth/2)
 				end
-				
-				print "------"
-				print (group.pan.x + Xoffset)
-				print "------"
-			
+				if _G.debugmode then				
+					print "------"
+					print (group.pan.x + Xoffset)
+					print "------"
+				end
 					if distFromEdgeX > 0 then 
-							if not tempXP then 
-								print "1!"
+							if not tempXP then
+								if _G.debugmode then 
+									print "1!"
+								end
 								tempX = -(boundsCircleX.x + boundsCircleX.width/2) + 10 
 								
 								if distFromEdgeY < 0 then 
@@ -118,7 +125,9 @@ function pan(e)
 								end 
 
 							else
-								print "2!"
+								if _G.debugmode then
+									print "2!"
+								end
 
 								tempX = (boundsCircleX.x + boundsCircleX.width/2) - 10 
 								
@@ -134,7 +143,9 @@ function pan(e)
 				
 					if distFromEdgeY > 0 then 
 							if not tempYP then 
-								print "3!"
+								if _G.debugmode then
+									print "3!"
+								end
 								tempY = -(boundsCircleY.y + boundsCircleY.width/2) + 10 
 			
 								if distFromEdgeX < 0 then 
@@ -142,7 +153,10 @@ function pan(e)
 								end 
 			
 							else
-								print "4!"
+								if _G.debugmode then
+									print "4!"
+								end
+								
 								tempY = (boundsCircleY.y + boundsCircleY.width/2) - 10 
 
 								if distFromEdgeX < 0 then 
@@ -168,8 +182,9 @@ function pan(e)
 				 		oldmpy = movePos.y
 				 	end 
 			 	
-
-					print "rubberpan!"
+				 	if _G.debugmode then
+						print "rubberpan!"
+					end
 					local factor = (1 - math.min(math.exp(distFromEdgeX), 0.9))
 					
 
@@ -193,7 +208,9 @@ function pan(e)
 			autocam = (tenflib.jsonLoad('autoScroll') or {true})[1]
 			if autocam then 
 				if rubberpanX or rubberpanY then 
-					print "heeeey!"
+					if _G.debugmode then
+						print "heeeey!"
+					end
 					transition.to (group.rubber, {time = 100, x = 0, y= 0, transition = easing.inOutQuad})
 					transition.to (group.pan, {time = 100, x = tempX, y = tempY, onComplete = function () 
 					rubberlol = false 
@@ -280,7 +297,9 @@ function rend.loadtiles(set)
 
 	for i = 1,8 do 
 		listoftiles[i] = ("Graphics/Tiles/tile_s0"..set.."t0"..i..".png")
-		print (listoftiles[i])
+		if _G.debugmode then
+			print (listoftiles[i])
+		end
 	end 
 	return listoftiles
 end
@@ -350,7 +369,9 @@ end
 function rend.colorMarker(r,g,b) -- setting the color of the marker
 	if r+g+b == 0 then r=80 g=80 b=80 end 
 		marker.blob:setFillColor(r,g,b)
-		print ("MARKER COLOR "..r,g,b)
+		if _G.debugmode then
+			print ("MARKER COLOR "..r,g,b)
+		end
 end 
 
 function rend.setGoalColor(r,g,b) -- setting the color of the goal tile
@@ -503,11 +524,13 @@ function rend.drawBoard (data)
 	level.gametype 			= data.Type
 	level.oneway 			= data.oneway
 
-	for k,v in pairs(data) do
-		print("hello! "..k,v)
-	end
+	if _G.debugmode then
+		for k,v in pairs(data) do
+			print("hello! "..k,v)
+		end
 
-	print ("gametype "..data.Type)
+		print ("gametype "..data.Type)
+	end
 
 	level.set = 2
 	if data.Type == "OneStep" 	then level.set = 3 end
@@ -517,25 +540,34 @@ function rend.drawBoard (data)
 
 	groupscaling = rend.getscale(level.size)
 	followmarker = rend.getsize(level.size)
+	local function bgCreate()
+		if bgCreated == false then
+			bgCreated = true
+			print("BG Created")
+			backg = {}
+			bg = display.newGroup() 
+			backg.bottom = display.newImageRect(bg,level.background[1],_W,_H)
+			backg.l1 = display.newImageRect(bg,level.background[2],_W,_H)
+			backg.l2 = display.newImageRect(bg,level.background[3],_W,_H)
+			backg.l3 = display.newImageRect(bg,level.background[4],_W,_H)
 
-	backg = {}
-	bg = display.newGroup() 
-	backg.bottom = display.newImageRect(bg,level.background[1],_W,_H)
-	backg.l1 = display.newImageRect(bg,level.background[2],_W,_H)
-	backg.l2 = display.newImageRect(bg,level.background[3],_W,_H)
-	backg.l3 = display.newImageRect(bg,level.background[4],_W,_H)
+			backg.l1.alpha = .2
+			backg.l2.alpha = .2
+			backg.l3.alpha = .2
 
-	backg.l1.alpha = .2
-	backg.l2.alpha = .2
-	backg.l3.alpha = .2
+			backg.bottom.blendMode = "screen"
+			backg.l1.blendMode = "screen"
+			backg.l2.blendMode = "screen"
+			backg.l3.blendMode = "screen"
 
-	backg.l1.blendMode = "screen"
-	backg.l2.blendMode = "screen"
-	backg.l3.blendMode = "screen"
-
-	bg:toBack()
-	bg.x = _W*.5
-	bg.y = _H*.5
+			bg:toBack()
+			bg.x = _W*.5
+			bg.y = _H*.5
+		else 
+			print("BG Already created")
+		end
+	end
+	bgCreate()
 
 	local tileset = rend.loadtiles(level.set)
 	local randomrotation 
@@ -582,9 +614,9 @@ function rend.drawBoard (data)
 				yoffset = -3 
 			end
 
-
-			print ("rot "..randomrotation)
-
+			if _G.debugmode then
+				print ("rot "..randomrotation)
+			end
 				tile[n].top.rotation = randomrotation 
 				tile[n].top.x = xoffset
 				tile[n].top.y = yoffset
@@ -648,7 +680,9 @@ function rend.drawBoard (data)
 					
 
 					tile[n].object = makeOneWayTile(rotationlist[level.tile[n]-9],n)
-					print ("state "..tile[n].object.state)
+					if _G.debugmode then
+						print ("state "..tile[n].object.state)
+					end
 					owi = owi + 1
 					--tile[n].object = display.newGroup() 
 					--oneway = display.newImageRect(tile[n].object,level.oneway[1],128,128)
@@ -661,8 +695,10 @@ function rend.drawBoard (data)
 					tile[n].object.y = tile[n].y - 3
 					group.tiles:insert(tile[n].object)
 					onewayID[owi] = owi 
-					print "one way tile"
-					print (owi)
+					if _G.debugmode then
+						print "one way tile"
+						print (owi)
+					end
 					
 				end 
 
@@ -779,8 +815,10 @@ function rend.drawBoard (data)
 		local bounds = group.tiles.contentBounds
 	 	lps = {maxX = bounds.xMax*groupscaling, minX = bounds.xMin*groupscaling, maxY = bounds.yMax*groupscaling, minY = bounds.yMin*groupscaling}
 		local realsizeX, realsizeY = lps.maxX - lps.minX, lps.maxY-lps.minY
-		print ("HELLOOOOOOO!!!!!!!!!!!!!!!!!!!!!!"..lps.maxX - lps.minX, lps.maxY-lps.minY)
 		
+		if _G.debugmode then
+			print ("HELLOOOOOOO!!!!!!!!!!!!!!!!!!!!!!"..lps.maxX - lps.minX, lps.maxY-lps.minY)
+		end	
 		
 		boundsCircleX = display.newCircle(group.pan,0,0,realsizeX/2 - realsizeX/6)
 		boundsCircleY = display.newCircle(group.pan,0,0,realsizeY/2 - realsizeY/6)
@@ -925,8 +963,10 @@ function rend.updateBoard(tileID, Value) -- updating a single tile
 
 			if replaymode then 
 				transition.to (tile[id], {delay = 300, time = 200, alpha = 0, xScale = 0.01, yScale = 0.01, transition = easing.inQuad, onComplete = function ()
-					for k,v in pairs(tile) do
-						print(k,v)
+					if _G.debugmode then
+						for k,v in pairs(tile) do
+							print(k,v)
+						end
 					end
 				end})
 			else
@@ -1154,6 +1194,8 @@ function rend.animate() -- animating the objects on screen.
 				backg.l3.yScale = 1+math.cos(counter2/2)*.04
 				backg.l1.xScale = 1+math.cos(counter2/4)*.08
 				backg.l1.yScale = 1+math.sin(counter2/4)*.08
+				backg.bottom.xScale = 1+math.cos(counter2/2)*0.001
+				backg.bottom.yScale = 1+math.sin(counter2)*.02
 			end 
 		end 
 		
