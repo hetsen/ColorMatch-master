@@ -15,9 +15,14 @@ function ach.postHighscore(scoreCategory, nameOfWorld)
 	local highScore = tenflib.jsonLoad("state"..nameOfWorld..".txt")
 
 	local totalSum = 0
-	
-	for i=1,#highScore do
-		totalSum = totalSum+highScore[i].points
+	if highScore then
+		for i=1,#highScore do
+			totalSum = totalSum+highScore[i].points
+		end
+	else
+		if _G.debugmode then
+			print("Highscore was nil.")
+		end
 	end
 
 	local highScoreTimer = timer.performWithDelay(100,function()
