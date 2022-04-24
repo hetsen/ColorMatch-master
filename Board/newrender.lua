@@ -36,8 +36,12 @@ local randomcounter = 0
 local phone 		= true
 local marker
 local backg
+--[[ <FUGLY FIXES CUZ IM LAZY /MICKE> ]] --
+local drawMarker	= false
 local bgCreated 	= false
-local animbg =  true 
+local boardDrawn	= false
+--[[ </FUGLY FIXES CUZ IM LAZY /MICKE> ]] --
+local animbg 		= true 
 local onewayID = {}
 local owi = 0 
 local cleaningUp
@@ -506,231 +510,232 @@ function rend.randomrotate ()
 end 
 
 function rend.drawBoard (data)
-	
+	if boardDrawn == false then
+		boardDrawn = true
 
-	local n = 0 
+		local n = 0 
 
-			local xoffset
-			local yoffset
+				local xoffset
+				local yoffset
 
-	level.imagelist	 		= data.imagelist
-	level.colorlist			= data.colorlist
-	level.itemlist 			= data.itemlist
-	level.size 				= data.Size
-	level.tile 				= data.Tile
-	level.marker 			= data.StartPos
-	level.gate 				= data.gate 
-	level.background 		= data.background
-	level.gametype 			= data.Type
-	level.oneway 			= data.oneway
+		level.imagelist	 		= data.imagelist
+		level.colorlist			= data.colorlist
+		level.itemlist 			= data.itemlist
+		level.size 				= data.Size
+		level.tile 				= data.Tile
+		level.marker 			= data.StartPos
+		level.gate 				= data.gate 
+		level.background 		= data.background
+		level.gametype 			= data.Type
+		level.oneway 			= data.oneway
 
-	if _G.debugmode then
-		for k,v in pairs(data) do
-			print("hello! "..k,v)
+		if _G.debugmode then
+			for k,v in pairs(data) do
+				print("hello! "..k,v)
+			end
+
+			print ("gametype "..data.Type)
 		end
 
-		print ("gametype "..data.Type)
-	end
-
-	level.set = 2
-	if data.Type == "OneStep" 	then level.set = 3 end
-	if data.Type == "Grey"		then level.set = 1 end  
+		level.set = 2
+		if data.Type == "OneStep" 	then level.set = 3 end
+		if data.Type == "Grey"		then level.set = 1 end  
 
 
 
-	groupscaling = rend.getscale(level.size)
-	followmarker = rend.getsize(level.size)
-	local function bgCreate()
-		if bgCreated == false then
-			bgCreated = true
-			print("BG Created")
-			backg = {}
-			bg = display.newGroup() 
-			backg.bottom = display.newImageRect(bg,level.background[1],_W,_H)
-			backg.l1 = display.newImageRect(bg,level.background[2],_W,_H)
-			backg.l2 = display.newImageRect(bg,level.background[3],_W,_H)
-			backg.l3 = display.newImageRect(bg,level.background[4],_W,_H)
+		groupscaling = rend.getscale(level.size)
+		followmarker = rend.getsize(level.size)
+		local function bgCreate()
+			if bgCreated == false then
+				bgCreated = true
+				print("BG Created")
+				backg = {}
+				bg = display.newGroup() 
+				backg.bottom = display.newImageRect(bg,level.background[1],_W,_H)
+				backg.l1 = display.newImageRect(bg,level.background[2],_W,_H)
+				backg.l2 = display.newImageRect(bg,level.background[3],_W,_H)
+				backg.l3 = display.newImageRect(bg,level.background[4],_W,_H)
 
-			backg.l1.alpha = .2
-			backg.l2.alpha = .2
-			backg.l3.alpha = .2
+				backg.l1.alpha = .2
+				backg.l2.alpha = .2
+				backg.l3.alpha = .2
 
-			backg.bottom.blendMode = "screen"
-			backg.l1.blendMode = "screen"
-			backg.l2.blendMode = "screen"
-			backg.l3.blendMode = "screen"
+				backg.bottom.blendMode = "screen"
+				backg.l1.blendMode = "screen"
+				backg.l2.blendMode = "screen"
+				backg.l3.blendMode = "screen"
 
-			bg:toBack()
-			bg.x = _W*.5
-			bg.y = _H*.5
-		else 
-			print("BG Already created")
+				bg:toBack()
+				bg.x = _W*.5
+				bg.y = _H*.5
+			else 
+				print("BG Already created")
+			end
 		end
-	end
-	bgCreate()
+		bgCreate()
 
-	local tileset = rend.loadtiles(level.set)
-	local randomrotation 
+		local tileset = rend.loadtiles(level.set)
+		local randomrotation 
 
-	for y = 1, level.size.y do 
-		for x = 1, level.size.x do 
-			n = n + 1
-			
-			tType = rend.getTileType(x,y,n,level)
+		for y = 1, level.size.y do 
+			for x = 1, level.size.x do 
+				n = n + 1
+				
+				tType = rend.getTileType(x,y,n,level)
 
-			local base = 1
-			local base2 = false
-			if level.set == 3 then 
-				base = 1
-				base2 = 5
-			end 
-
-			randomizer = rend.makerandom(base,base2)
-
-				tile[n] = display.newGroup()
-				tile[n].bottom = display.newImageRect (tile[n],level.imagelist[tType],32,38)
-				tile[n].top = display.newImageRect (tile[n],tileset[randomizer],32,38) 
-
-			
-	
-
-			randomrotation = 0
-
-			xoffset = 0 
-			yoffset = 0 
-
-			if randomrotation == 90 then 
-				xoffset = -2.6
-				yoffset = -2.9 
-			end
-			
-			if randomrotation == 180 then 
-				xoffset = 0
-				yoffset = -6 
-			end
-		
-			if randomrotation == 270 then 
-				xoffset = 2.6
-				yoffset = -3 
-			end
-
-			if _G.debugmode then
-				print ("rot "..randomrotation)
-			end
-				tile[n].top.rotation = randomrotation 
-				tile[n].top.x = xoffset
-				tile[n].top.y = yoffset
-				tile[n].x = (x-0.5) * tilesize 
-				tile[n].y = (y-0.5) * tilesize
-				tile[n].id = n
-				tile[n].xPos = x
-				tile[n].yPos = y
-				tile[n]:toFront()
-				tile[n].type = level.tile[n]
-
-				if tile[n].type == 0 then 
-					tile[n].isVisible = false
+				local base = 1
+				local base2 = false
+				if level.set == 3 then 
+					base = 1
+					base2 = 5
 				end 
 
-				group.tiles:insert(tile[n])
+				randomizer = rend.makerandom(base,base2)
 
-				if level.tile[n] == 2 then 
-					
-					tile[n].object = display.newGroup() 
+					tile[n] = display.newGroup()
+					tile[n].bottom = display.newImageRect (tile[n],level.imagelist[tType],32,38)
+					tile[n].top = display.newImageRect (tile[n],tileset[randomizer],32,38) 
 
-					goal = display.newImageRect(tile[n].object,level.gate[1],128,128)
-					goal.alpha = 0 
-					lamp = display.newImageRect(tile[n].object,level.gate.lamp[1],128,128)
-					lamp.glow = display.newImageRect(tile[n].object,level.gate.lamp[2],128,128)
-					lamp.glow.alpha = .6 
-					goal.xScale, goal.yScale = 0.25, 0.25
-					lamp.xScale, lamp.yScale = 0.25, 0.25
-					lamp.glow.xScale, lamp.glow.yScale = 0.25, 0.25
+				
+		
 
+				randomrotation = 0
+
+				xoffset = 0 
+				yoffset = 0 
+
+				if randomrotation == 90 then 
+					xoffset = -2.6
+					yoffset = -2.9 
+				end
+				
+				if randomrotation == 180 then 
+					xoffset = 0
+					yoffset = -6 
+				end
+			
+				if randomrotation == 270 then 
+					xoffset = 2.6
+					yoffset = -3 
+				end
+
+				if _G.debugmode then
+					print ("rot "..randomrotation)
+				end
+					tile[n].top.rotation = randomrotation 
+					tile[n].top.x = xoffset
+					tile[n].top.y = yoffset
+					tile[n].x = (x-0.5) * tilesize 
+					tile[n].y = (y-0.5) * tilesize
+					tile[n].id = n
+					tile[n].xPos = x
+					tile[n].yPos = y
+					tile[n]:toFront()
+					tile[n].type = level.tile[n]
+
+					if tile[n].type == 0 then 
+						tile[n].isVisible = false
+					end 
+
+					group.tiles:insert(tile[n])
+
+					if level.tile[n] == 2 then 
+						
+						tile[n].object = display.newGroup() 
+
+						goal = display.newImageRect(tile[n].object,level.gate[1],128,128)
+						goal.alpha = 0 
+						lamp = display.newImageRect(tile[n].object,level.gate.lamp[1],128,128)
+						lamp.glow = display.newImageRect(tile[n].object,level.gate.lamp[2],128,128)
+						lamp.glow.alpha = .6 
+						goal.xScale, goal.yScale = 0.25, 0.25
+						lamp.xScale, lamp.yScale = 0.25, 0.25
+						lamp.glow.xScale, lamp.glow.yScale = 0.25, 0.25
+
+							tile[n].object.x = tile[n].x
+							tile[n].object.y = tile[n].y - 3
+							tile[n].object.color = tile[n].type
+						
+						group.tiles:insert(tile[n].object)
+					end 
+
+				local function makeOneWayTile(direction, position)
+					local sheetdata={width = 128, height = 128, numFrames = 4, sheetContentWidth = 512, sheetContentHeight = 128}
+					local sheet = graphics.newImageSheet('Graphics/Objects/arrow_sprite.png', sheetdata)
+						
+						oSData = {
+				 		{name = "open",frames = {2,3,4},time = 1500,loopCount = 0},
+				 		{name = "close",frames = {1},time = 1500,loopCount = 1},
+				 		}
+				 		local otile = display.newSprite(group.tiles,sheet, oSData)
+						
+						otile.x, otile.y = tile[position].x,tile[position].y-3
+						otile.xScale, otile.yScale = 0.25,0.25
+						otile.rotation = direction
+						otile:setSequence( "open" )
+				 		otile:play()
+				 		otile.direction = otile.rotation
+						otile.state = "open"
+					return otile
+				end
+
+		
+
+					if level.tile[n] >= 10 and level.tile[n] < 14 then
+						
+
+						tile[n].object = makeOneWayTile(rotationlist[level.tile[n]-9],n)
+						if _G.debugmode then
+							print ("state "..tile[n].object.state)
+						end
+						owi = owi + 1
+						--tile[n].object = display.newGroup() 
+						--oneway = display.newImageRect(tile[n].object,level.oneway[1],128,128)
+						
+						
+
+
+						--oneway.xScale, oneway.yScale = 0.20, 0.20
 						tile[n].object.x = tile[n].x
 						tile[n].object.y = tile[n].y - 3
-						tile[n].object.color = tile[n].type
-					
-					group.tiles:insert(tile[n].object)
-				end 
-
-			local function makeOneWayTile(direction, position)
-				local sheetdata={width = 128, height = 128, numFrames = 4, sheetContentWidth = 512, sheetContentHeight = 128}
-				local sheet = graphics.newImageSheet('Graphics/Objects/arrow_sprite.png', sheetdata)
-					
-					oSData = {
-			 		{name = "open",frames = {2,3,4},time = 1500,loopCount = 0},
-			 		{name = "close",frames = {1},time = 1500,loopCount = 1},
-			 		}
-			 		local otile = display.newSprite(group.tiles,sheet, oSData)
-					
-					otile.x, otile.y = tile[position].x,tile[position].y-3
-					otile.xScale, otile.yScale = 0.25,0.25
-					otile.rotation = direction
-					otile:setSequence( "open" )
-			 		otile:play()
-			 		otile.direction = otile.rotation
-					otile.state = "open"
-				return otile
-			end
-
-	
-
-				if level.tile[n] >= 10 and level.tile[n] < 14 then
-					
-
-					tile[n].object = makeOneWayTile(rotationlist[level.tile[n]-9],n)
-					if _G.debugmode then
-						print ("state "..tile[n].object.state)
-					end
-					owi = owi + 1
-					--tile[n].object = display.newGroup() 
-					--oneway = display.newImageRect(tile[n].object,level.oneway[1],128,128)
-					
-					
-
-
-					--oneway.xScale, oneway.yScale = 0.20, 0.20
-					tile[n].object.x = tile[n].x
-					tile[n].object.y = tile[n].y - 3
-					group.tiles:insert(tile[n].object)
-					onewayID[owi] = owi 
-					if _G.debugmode then
-						print "one way tile"
-						print (owi)
-					end
-					
-				end 
-
-				if level.tile[n] > 1 and level.tile[n] ~= 2 and level.tile[n] < 10 then 
-					tile[n].object = display.newImageRect (level.itemlist[level.tile[n] ],22,22) 
-						tile[n].object.x = tile[n].x
-						tile[n].object.y = tile[n].y 
-						tile[n].object.color = tile[n].type
-					
-					group.tiles:insert(tile[n].object)
-					
-
-
-					if level.tile[n] > 2 and level.tile[n] < 11 then 
-						if glow then 
-							tile[n].objectglow = display.newImageRect ("pics/glow.png",32,32)
-								tile[n].objectglow.x,tile[n].objectglow.y =  tile[n].object.x, tile[n].object.y
-								tile[n].objectglow:setFillColor(unpack (level.colorlist[level.tile[n] ]))
-								tile[n].objectglow.blendMode = "add"
-					
-							group.tiles:insert(tile[n].objectglow)
-						end 					
-					
+						group.tiles:insert(tile[n].object)
+						onewayID[owi] = owi 
+						if _G.debugmode then
+							print "one way tile"
+							print (owi)
+						end
+						
 					end 
-				end
-				if level.tile[n] == 2 then 
-					goaltileID = n
-				end 
 
-		end 
+					if level.tile[n] > 1 and level.tile[n] ~= 2 and level.tile[n] < 10 then 
+						tile[n].object = display.newImageRect (level.itemlist[level.tile[n] ],22,22) 
+							tile[n].object.x = tile[n].x
+							tile[n].object.y = tile[n].y 
+							tile[n].object.color = tile[n].type
+						
+						group.tiles:insert(tile[n].object)
+						
+
+
+						if level.tile[n] > 2 and level.tile[n] < 11 then 
+							if glow then 
+								tile[n].objectglow = display.newImageRect ("pics/glow.png",32,32)
+									tile[n].objectglow.x,tile[n].objectglow.y =  tile[n].object.x, tile[n].object.y
+									tile[n].objectglow:setFillColor(unpack (level.colorlist[level.tile[n] ]))
+									tile[n].objectglow.blendMode = "add"
+						
+								group.tiles:insert(tile[n].objectglow)
+							end 					
+						
+						end 
+					end
+					if level.tile[n] == 2 then 
+						goaltileID = n
+					end 
+
+			end 
 	
-
+		end
 	end 
 
 --implementing sheetdata for both goaltile and oneway-tile
@@ -758,57 +763,58 @@ function rend.drawBoard (data)
 		touchTile.blendMode = "add"
 		touchTile.alpha = 0 
 		group.tiles:insert(touchTile)	
+		if drawMarker == false then
+			drawMarker = true
+			marker = display.newGroup()
 
-		marker = display.newGroup()
+			marker.blob = display.newImageRect(marker, "pics/marker.png",25,25 )
+			marker.x = (level.marker.x-0.5) * tilesize
+			marker.y = (level.marker.y-0.6) * tilesize
+			marker.blob.alpha = .8
+			marker:addEventListener("tap",plusMinus)
+			marker.eye={}
 
-		marker.blob = display.newImageRect(marker, "pics/marker.png",25,25 )
-		marker.x = (level.marker.x-0.5) * tilesize
-		marker.y = (level.marker.y-0.6) * tilesize
-		marker.blob.alpha = .8
-		marker:addEventListener("tap",plusMinus)
-		marker.eye={}
+			for i = 1,2 do 
+				marker.eye[i] = display.newImageRect(marker,"Graphics/Objects/eye_sclera.png" ,70,70)
+				marker.eye[i].dot = display.newImageRect(marker,"Graphics/Objects/eye_pupil.png", 6,6)
+				
+				marker.eye[i].yScale = .1
+				marker.eye[i].xScale = .1
+				
+				marker.eye[i]:setFillColor(255,255,255)
+				marker.eye[i].dot:setFillColor(0,0,0)
 
-		for i = 1,2 do 
-			marker.eye[i] = display.newImageRect(marker,"Graphics/Objects/eye_sclera.png" ,70,70)
-			marker.eye[i].dot = display.newImageRect(marker,"Graphics/Objects/eye_pupil.png", 6,6)
+				marker.eye[i].y = -1
+				marker.eye[i].dot.y = -2
+				marker.eye[i]:toFront()
+				marker.eye[i].dot:toFront()
 			
-			marker.eye[i].yScale = .1
-			marker.eye[i].xScale = .1
-			
-			marker.eye[i]:setFillColor(255,255,255)
-			marker.eye[i].dot:setFillColor(0,0,0)
+			end
+				marker.eye[1].x = -3.6
+				marker.eye[2].x = 3.6
+				marker.eye[1].dot.x = -3.6
+				marker.eye[2].dot.x = 3.6
 
-			marker.eye[i].y = -1
-			marker.eye[i].dot.y = -2
-			marker.eye[i]:toFront()
-			marker.eye[i].dot:toFront()
+			group.tiles:insert(marker)
 		
-		end
-			marker.eye[1].x = -3.6
-			marker.eye[2].x = 3.6
-			marker.eye[1].dot.x = -3.6
-			marker.eye[2].dot.x = 3.6
 
-		group.tiles:insert(marker)
-	
+		
+			group.tiles.xScale = groupscaling
+			group.tiles.yScale = groupscaling
+			group.tiles:setReferencePoint(display.CenterReferencePoint)
+			group.tiles.x = _W/2 - 15
+			group.tiles.y = _H/2
 
-	
-		group.tiles.xScale = groupscaling
-		group.tiles.yScale = groupscaling
-		group.tiles:setReferencePoint(display.CenterReferencePoint)
-		group.tiles.x = _W/2 - 15
-		group.tiles.y = _H/2
+		if longscreen then group.pan.yScale = .84 
+							
+							group.pan.y = 32 
+						end
 
-	if longscreen then group.pan.yScale = .84 
-						
-						group.pan.y = 32 
-					end
-
-	if followmarker then 
-		group.pan.x = 15
-		rend.setCamera (level,1,1)
-	end 
-
+		if followmarker then 
+			group.pan.x = 15
+			rend.setCamera (level,1,1)
+		end 
+	end
 
 
 
