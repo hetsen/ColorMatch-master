@@ -68,8 +68,14 @@ function aud.play(sound, wait)
 			soundplayed = false
 		end 
 	end 
+	--[[ <FUGLY FIX, I DONT KNOW WHAT THE PURPOSE OF DIS WAS. AND IM TOO LAZY TO FIGURE OUT /MICKE>]]--
+	if #sound then
+		random = math.random(#sound)
+	else
+		random = 1 --not so random, eh?
+	end
+	--[[ </FUGLY FIX, I DONT KNOW WHAT THE PURPOSE OF DIS WAS. AND IM TOO LAZY TO FIGURE OUT /MICKE>]]--
 
-	random = math.random(#sound)
 	count = count + 1; if count > 31 then count = 3;end 
 	print ("channel "..count) 
 
