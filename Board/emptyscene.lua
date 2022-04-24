@@ -12,13 +12,12 @@ function scene:create(e)
 	end 
 
 function reverttolast()
-
 	if params.toPrev then
 		composer.gotoScene(prev,{params = params})
 	else
 		composer.gotoScene("controller",{params = params})
+		composer.removeScene("emptyscene", false )
 	end
-
 end 
 
 timer.performWithDelay (10, function() reverttolast() end)
