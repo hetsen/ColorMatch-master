@@ -37,6 +37,7 @@ local phone 		= true
 local marker
 local backg
 --[[ <FUGLY FIXES CUZ IM LAZY /MICKE> ]] --
+local markerToFront = false
 local drawMarker	= false
 local bgCreated 	= false
 local boardDrawn	= false
@@ -270,7 +271,6 @@ function rend.goal(string)
 			
 			lamp:toFront()
 			lamp.glow:toFront()
-			marker:toFront()
 			
 			goaltileopen = not goaltileopen
 		else
@@ -285,7 +285,7 @@ function rend.goal(string)
 			 spriteAnimation:setSequence( "open" )
 			 spriteAnimation:play()
 
-			 marker:toFront()
+			 
 
 			transition.to (lamp.glow, {time = 500, alpha = 0})
 			transition.to (lamp, {time = 500, alpha = 0})
@@ -349,6 +349,11 @@ function rend.CannotWalkThere() -- does nothing.
 end
 
 function rend.markTile(id,color) -- function for marking the tile you click on.
+	if markerToFront == false then
+		markerToFront = true
+		marker:toFront() --fugly fix so marker don't go poof behind the goaltile
+	end
+	
 	if color == "red" then 
 		touchTile:setFillColor (255/255,0,0)
 		--inProgress = true
@@ -1149,7 +1154,7 @@ end
 
 function rend.explodeBoard(win) -- kills the board
 	--print "explodeboard"
-	marker:toFront()
+	
 	timer.performWithDelay(300, function ()
 		physics.start()
 			aud.play (sounds.falling)
