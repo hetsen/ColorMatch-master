@@ -350,15 +350,15 @@ end
 
 function rend.markTile(id,color) -- function for marking the tile you click on.
 	if color == "red" then 
-		touchTile:setFillColor (255,0,0)
+		touchTile:setFillColor (255/255,0,0)
 		--inProgress = true
 	end
 	if color == "green" then 
-		touchTile:setFillColor (0,255,0)
+		touchTile:setFillColor (0,255/255,0)
 	end
 
 	if color == "blue" then 
-		touchTile:setFillColor (100,100,255)
+		touchTile:setFillColor (100/255,100/255,255/255)
 	end
 
 	touchTile.x = tile[id].x
@@ -372,15 +372,15 @@ end
 
 function rend.colorMarker(r,g,b) -- setting the color of the marker
 	if r+g+b == 0 then r=80 g=80 b=80 end 
-		marker.blob:setFillColor(r,g,b)
+		marker.blob:setFillColor(r/255,g/255,b/255)
 		if _G.debugmode then
 			print ("MARKER COLOR "..r,g,b)
 		end
 end 
 
 function rend.setGoalColor(r,g,b) -- setting the color of the goal tile
-	lamp:setFillColor(r,g,b)
-	lamp.glow:setFillColor(r,g,b)
+	lamp:setFillColor(r/255,g/255,b/255)
+	lamp.glow:setFillColor(r/255,g/255,b/255)
 end  
 	
 function rend.directionPrinter( MoveHistoryTable )
@@ -781,7 +781,7 @@ function rend.drawBoard (data)
 				marker.eye[i].yScale = .1
 				marker.eye[i].xScale = .1
 				
-				marker.eye[i]:setFillColor(255,255,255)
+				marker.eye[i]:setFillColor(255/255,255/255,255/255)
 				marker.eye[i].dot:setFillColor(0,0,0)
 
 				marker.eye[i].y = -1
@@ -801,7 +801,10 @@ function rend.drawBoard (data)
 		
 			group.tiles.xScale = groupscaling
 			group.tiles.yScale = groupscaling
-			group.tiles:setReferencePoint(display.CenterReferencePoint)
+			--group.tiles:setReferencePoint(display.CenterReferencePoint)
+			group.tiles.anchorX = .5
+			group.tiles.anchorY = .5
+			group.tiles.anchorChildren = true
 			group.tiles.x = _W/2 - 15
 			group.tiles.y = _H/2
 
@@ -830,10 +833,10 @@ function rend.drawBoard (data)
 		boundsCircleY = display.newCircle(group.pan,0,0,realsizeY/2 - realsizeY/6)
 		boundsCircleX.x = _W/2
 		boundsCircleX.y = _H/2
-		boundsCircleX:setFillColor (255,0,0)
+		boundsCircleX:setFillColor (255/255,0,0)
 		boundsCircleY.x = _W/2
 		boundsCircleY.y = _H/2
-		boundsCircleY:setFillColor (0,255,0)
+		boundsCircleY:setFillColor (0,255/255,0)
 		
 		if boundscircles then 
 			boundsCircleX.alpha = .3

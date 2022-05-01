@@ -890,7 +890,9 @@ do
 		end
 		refText:removeSelf()
 
-		charGroup:setReferencePoint(display.CenterReferencePoint)
+		--charGroup:setReferencePoint(display.CenterReferencePoint)
+		charGroup.anchorX = .5
+		charGroup.anchorY = .5
 		charGroup.setText = setText
 		charGroup.setTextColor = setTextColor
 
@@ -938,7 +940,9 @@ do
 		end
 		refText:removeSelf()
 
-		charGroup:setReferencePoint(display.CenterReferencePoint)
+		--charGroup:setReferencePoint(display.CenterReferencePoint)
+		charGroup.anchorX = 0.5
+		charGroup.anchorY = 0.5
 		charGroup.setText = setText
 		charGroup.setTextColor = setTextColor
 
@@ -1411,6 +1415,9 @@ end
 --   img2 = display.newImageRect('background.png', 1024, 768)
 --   setAttr(img, {x=0, y=0}, {rp='TL'})
 -- Uppdaterad: 2012-07-11 19:55 av Marcus Thunström
+-- 
+-- Kan uppdateras för Graphics 2.0 om det behövs
+-- Uppdaterad: 2022-05-01 15:35 av Micke Ishaxson
 do
 	local rps = {
 		TL=display.TopLeftReferencePoint,

@@ -136,7 +136,7 @@ local new = function(x, y, col1, col2, size)
 										if bl > 255 then bl = 255 end
 					
 										--print("Color is: r_"..rd.." g_"..bl.." b_"..gr)
-										t[j]:setFillColor(rd, gr, bl)
+										t[j]:setFillColor(rd/255,gr/255,bl/255)
 									end
 								end 
 								for j = 1, parent[i].numChildren do
@@ -149,7 +149,7 @@ local new = function(x, y, col1, col2, size)
 										if gr > 255 then gr = 255 end
 										if bl > 255 then bl = 255 end
 										--print("Color is: r_"..rd.." g_"..gr.." b_"..bl)
-										parent[i][j]:setFillColor(rd, gr, bl)
+										parent[i][j]:setFillColor(rd/255,gr/255,bl/255)
 									end
 								end 
 								-- ( end facing sides ) 
@@ -166,7 +166,7 @@ local new = function(x, y, col1, col2, size)
 										if bl > 255 then bl = 255 end
 					
 										--print("Color is: r_"..rd.." g_"..bl.." b_"..gr)
-										t[j]:setFillColor(rd, gr, bl)
+										t[j]:setFillColor(rd/255,gr/255,bl/255)
 									end
 								end 
 								for j = 1, parent[i].numChildren do
@@ -179,7 +179,7 @@ local new = function(x, y, col1, col2, size)
 										if gr > 255 then gr = 255 end
 										if bl > 255 then bl = 255 end
 										--print("Color is: r_"..rd.." g_"..gr.." b_"..bl)
-										parent[i][j]:setFillColor(rd, gr, bl)
+										parent[i][j]:setFillColor(rd/255,gr/255,bl/255)
 									end
 								end
 								-- ( end oposing sides ) 
@@ -209,29 +209,29 @@ local new = function(x, y, col1, col2, size)
 
 
 		local imageRight = display.newImageRect(gr, "Graphics/Backgrounds/cellright.png", 80, 78 )
-		imageRight:setReferencePoint( display.CenterReferencePoint )
-		--imageRight.anchorX = .5
-		--imageRight.anchorY = .5
-		imageRight:setFillColor(255*col2[1],255*col2[2],255*col2[3])
+		--imageRight:setReferencePoint( display.CenterReferencePoint )
+		imageRight.anchorX = .5
+		imageRight.anchorY = .5
+		imageRight:setFillColor(255*col2[1]/255,255*col2[2]/255,255*col2[3]/255)
 		imageRight.tag = "col2"
 
 		local imageLeft = display.newImageRect(gr, "Graphics/Backgrounds/cellleft.png", 80, 78 )
-		imageLeft:setReferencePoint( display.CenterReferencePoint )
-		--imageLeft.anchorX = .5
-		--imageLeft.anchorY = .5
-		imageLeft:setFillColor(255*col1[1],255*col1[2],255*col1[3])
+		--imageLeft:setReferencePoint( display.CenterReferencePoint )
+		imageLeft.anchorX = .5
+		imageLeft.anchorY = .5
+		imageLeft:setFillColor(255*col1[1]/255,255*col1[2]/255,255*col1[3]/255)
 		imageLeft.tag = "col1"
 
 		local imageOntop = display.newImageRect(gr, "Graphics/Menu/sphere.png", 79, 79 )
-		imageOntop:setReferencePoint( display.CenterReferencePoint )
-		--imageOntop.anchorX = .5
-		--imageOntop.anchorY = .5
+		--imageOntop:setReferencePoint( display.CenterReferencePoint )
+		imageOntop.anchorX = .5
+		imageOntop.anchorY = .5
 		imageOntop.alpha = 0.35
 
 
-		gr:setReferencePoint( display.CenterReferencePoint )
-		--gr.anchorX = .5
-		--gr.anchorY = .5
+		--gr:setReferencePoint( display.CenterReferencePoint )
+		gr.anchorX = .5
+		gr.anchorY = .5
 		gr:scale(size,size)
 		gr.x, gr.y = _x, _y
 		gr.color1 = col1
@@ -336,7 +336,7 @@ local new = function(x, y, col1, col2, size)
 					if bl > 255 then bl = 255 end
 
 					--print("Color is: r_"..rd.." g_"..bl.." b_"..gr)
-					t[j]:setFillColor(rd, gr, bl)
+					t[j]:setFillColor(rd/255,gr/255,bl/255)
 				end
 				--print(t[j].tag)
 			end 
@@ -356,7 +356,7 @@ local new = function(x, y, col1, col2, size)
 					if gr > 255 then gr = 255 end
 					if bl > 255 then bl = 255 end
 					--print("Color is: r_"..rd.." g_"..gr.." b_"..bl)
-					otherCell.cellGroup[j]:setFillColor(rd, gr, bl)
+					otherCell.cellGroup[j]:setFillColor(rd/255,gr/255,bl/255)
 				end
 			end 
 			-- ( end facing sides ) 
@@ -373,7 +373,7 @@ local new = function(x, y, col1, col2, size)
 					if bl > 255 then bl = 255 end
 
 					--print("Color is: r_"..rd.." g_"..bl.." b_"..gr)
-					t[j]:setFillColor(rd, gr, bl)
+					t[j]:setFillColor(rd/255,gr/255,bl/255)
 				end
 			end 
 			for j = 1, otherCell.cellGroup.numChildren do
@@ -386,7 +386,7 @@ local new = function(x, y, col1, col2, size)
 					if gr > 255 then gr = 255 end
 					if bl > 255 then bl = 255 end
 					--print("Color is: r_"..rd.." g_"..gr.." b_"..bl)
-					otherCell.cellGroup[j]:setFillColor(rd, gr, bl)
+					otherCell.cellGroup[j]:setFillColor(rd/255,gr/255,bl/255)
 				end
 			end
 			-- ( end oposing sides ) 
@@ -417,7 +417,7 @@ local new = function(x, y, col1, col2, size)
 		--print("Random color: "..n)
 
 		for j = 1, self.cellGroup.numChildren do	
-			self.cellGroup[j]:setFillColor(255*colList[n][1],255*colList[n][2],255*colList[n][3])
+			self.cellGroup[j]:setFillColor(255*colList[n][1]/255,255*colList[n][2]/255,255*colList[n][3]/255)
 		end
 		self.cellGroup.color1 = colList[n]
 		self.cellGroup.color2 = colList[n]

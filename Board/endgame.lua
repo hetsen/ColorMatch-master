@@ -256,7 +256,7 @@ function scene:create(e)
 					dialogueobj.anchorY = .5
 					dialogueobj.x = _W*.5
 					dialogueobj.y = _H*.52
-					dialogueobj:setFillColor(200,255,255)
+					dialogueobj:setFillColor(200/255,255/255,255/255)
 
 			leveltext = display.newText (dialogGroup,"Your Score",0,0,systemfont,_G.mediumLargeFontSize)
 				leveltext.x = _W*.5

@@ -15,7 +15,7 @@ end
 
 application = {
 	content = {
-      graphicsCompatibility = 1,  --this turns on V1 Compatibility mode
+      --graphicsCompatibility = 1,  --this turns on V1 Compatibility mode
         
 		width = 320,
 		height = 320 / aspectRatio, 

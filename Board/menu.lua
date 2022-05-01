@@ -509,12 +509,12 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 			
 			dialogueobj = display.newImageRect(dialogGroup, 'Graphics/Menu/menu_backdrop.png', 1032, 1032)
 				dialogueobj.xScale, dialogueobj.yScale = (_W / 1032)*0.8, (_H / 1032)*0.78
-				dialogueobj:setReferencePoint(display.CenterReferencePoint)
-				--dialogueobj.anchorX = .5
-				--dialogueobj.anchorY = .5
+				--dialogueobj:setReferencePoint(display.CenterReferencePoint)
+				dialogueobj.anchorX = .5
+				dialogueobj.anchorY = .5
 				dialogueobj.x = _W*.5
 				dialogueobj.y = _H*.43 + _G.adSpace
-				dialogueobj:setFillColor(200,255,255)
+				dialogueobj:setFillColor(200/255,255/255,255/255)
 
 			for k,v in pairs(currentlevel) do
 				--print(k,v)
@@ -905,9 +905,9 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 		obj = display.newImageRect('Graphics/Menu/menu_backdrop.png', 1032, 1032)
 		
 
-		obj:setReferencePoint(display.CenterReferencePoint)
-		--obj.anchorX = .5
-		--obj.anchorY = .5
+		--obj:setReferencePoint(display.CenterReferencePoint)
+		obj.anchorX = .5
+		obj.anchorY = .5
 		obj.x = _W*.5
 		
 		if not ip5 then 
@@ -920,7 +920,7 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 
 
 
-		obj:setFillColor(255,10,135)
+		obj:setFillColor(255/255,10/255,135/255)
 		local pageoffset = _W
 		local iNum = 0 
 		--for p = 1, amtPages do 
@@ -952,11 +952,13 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 				icon[iNum] = display.newImageRect (pageGroup,"Graphics/UI/level_btn.png",50,50)
 				icon[iNum].t = display.newText (pageGroup,i,0,0,systemfont,_G.mediumFontSize)
 
-				icon[iNum]:setReferencePoint (display.CenterReferencePoint)
-				
+				--icon[iNum]:setReferencePoint (display.CenterReferencePoint)
+				icon[iNum].anchorX = 0.5
+				icon[iNum].anchorY = 0.5
+
 				icon[iNum].level = levelList[i]
 				icon[iNum].alpha = 1
-				icon[iNum]:setFillColor (200,200,255)
+				icon[iNum]:setFillColor (200/255,200/255,255/255)
 
 
 				icon[iNum].x = row * 60 + 10 + (pageoffset*pageN)
@@ -990,8 +992,8 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 					
 					if listoflevelsplayed then 
 						if iNum <= (#listoflevelsplayed + 1 - userlevelsplayed) then 
-							icon[iNum]:setFillColor (200,200,255)
-							icon[iNum]:setStrokeColor(0,0,255)
+							icon[iNum]:setFillColor (200/255,200/255,255/255)
+							icon[iNum]:setStrokeColor(0,0,255/255)
 							icon[iNum].unlocked = true 
 						
 							
@@ -1015,8 +1017,8 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 							if debugmode then 
 								icon[iNum]:addEventListener("tap",m.tapEvent)
 							end 
-							icon[iNum]:setFillColor (200,200,200)
-							icon[iNum]:setStrokeColor(100,100,100)
+							icon[iNum]:setFillColor (200/255,200/255,200/255)
+							icon[iNum]:setStrokeColor(100/255,100/255,100/255)
 						
 							
 
@@ -1025,16 +1027,16 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 						if _G.lockdown then 
 							if iNum >= _G.lockdownlimit then 
 								icon[iNum].t.alpha = .5
-								icon[iNum]:setFillColor (60,60,60)
-								icon[iNum]:setStrokeColor(100,0,0)
+								icon[iNum]:setFillColor (60/255,60/255,60/255)
+								icon[iNum]:setStrokeColor(100/255,0,0)
 							end 	
 						end 
 
 					else 
 						if iNum == 1 then 
 							print "setting regular color"
-							icon[iNum]:setFillColor (200,200,255)
-							icon[iNum]:setStrokeColor(0,0,255)
+							icon[iNum]:setFillColor (200/255,200/255,255/255)
+							icon[iNum]:setStrokeColor(0,0,255/255)
 							icon[iNum]:addEventListener("tap",m.tapEvent)
 							icon[iNum].unlocked = true 
 						else
@@ -1042,14 +1044,14 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 							if debugmode then 
 								icon[iNum]:addEventListener("tap",m.tapEvent)
 							end 
-							icon[iNum]:setFillColor (200,200,200)
-							icon[iNum]:setStrokeColor(100,100,100)
+							icon[iNum]:setFillColor (200/255,200/255,200/255)
+							icon[iNum]:setStrokeColor(100/255,100/255,100/255)
 						end 
 					end 
 				
 				else -- custom menu
-				 	icon[iNum]:setFillColor (200,200,255)
-					icon[iNum]:setStrokeColor(0,0,255)
+				 	icon[iNum]:setFillColor (200/255,200/255,255/255)
+					icon[iNum]:setStrokeColor(0,0,255/255)
 					icon[iNum].unlocked = true 
 					icon[iNum]:addEventListener("tap",m.tapEvent)
 				end 
@@ -1072,8 +1074,8 @@ backgroundmusic = "colorboard_ingame_2.mp3"
 										if i >= _G.lockdownlimit then 
 											print (i, _G.lockdownlimit)
 										else
-									icon[i]:setStrokeColor (0,255,0)
-									icon[i]:setFillColor (200,255,200)
+									icon[i]:setStrokeColor (0,255/255,0)
+									icon[i]:setFillColor (200/255,255/255,200/255)
 
 									if listoflevelsplayed[n].numStars then 
 

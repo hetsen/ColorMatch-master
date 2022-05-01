@@ -93,7 +93,9 @@ function proxy:createListView(_parent, _listOfItems, _params)
 
 			--Skapar text
 				local text = display.newText(item, textToWrite, 0, 0, font, fontSize)
-				text:setReferencePoint(display.CenterLeftReferencePoint)
+				text.anchorX = 0
+				text.anchorY = 0.5
+				--text:setReferencePoint(display.CenterLeftReferencePoint)
 				text.x, text.y = -background.width / 2 + textPadding, background.y
 				text:setTextColor(type(textButtonColor) == "table" and unpack(textButtonColor) or textButtonColor)
 

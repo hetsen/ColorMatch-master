@@ -8,7 +8,9 @@ local selectFile = nil
 local directionCount = 0
 local marked = display.newRect(0,0,200,40)
 marked:setFillColor(255,0,0,100)
-marked:setReferencePoint(display.TopCenterReferencePoint)
+--marked:setReferencePoint(display.TopCenterReferencePoint)
+marked.anchorX = 0.5
+marked.anchorY = 0
 marked.isVisible = false
 function name(_callback)
      local defaultField, numberField -- forward reference (needed for Lua closure)

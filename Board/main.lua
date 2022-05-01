@@ -213,7 +213,7 @@ local worlds = {
 	--['Glistening Tides'] = "GlisteningTides",
 }
 print(worlds[1])
-_G.debugmode = false 
+_G.debugmode = true 
 
 _G.model = model
 _G.appVersion = '1.0.0'
@@ -262,11 +262,11 @@ _G.mediumLargeFontSize	= 30
 _G.largeFontSize		= 40
 _G.hugeFontSize 		= 60
 
-_G.levelSelectColor 	= {128,0,255} -- För level select och level editor
-_G.replayColor 			= {0,128,255} -- För replay
-_G.continueColor 		= {255,255,0} -- För user levels, continue och back
-_G.playColor 			= {0,255,0}   -- För play och story mode
-_G.mainMenuColor 		= {255,128,0} -- för main menu och options
+_G.levelSelectColor 	= {128/255,0,255/255} -- För level select och level editor
+_G.replayColor 			= {0,128/255,255/255} -- För replay
+_G.continueColor 		= {255/255,255/255,0} -- För user levels, continue och back
+_G.playColor 			= {0,255/255,0}   -- För play och story mode
+_G.mainMenuColor 		= {255/255,128/255,0} -- för main menu och options
 
 print ("Device : ".._G.model)
 
@@ -291,6 +291,7 @@ systemfont = "Averia-Bold"
 -- 		_G.loadingScreen.dir = 1
 -- 	end
 -- end
+native.setProperty( "androidSystemUiVisibility" , "immersiveSticky" )
 
 _G.loadingScreen = display.newGroup()
 
@@ -307,6 +308,7 @@ bg.x, bg.y = 0, 0
 local fg = display.newImageRect(loadingScreen, 'Graphics/UI/loading_glow.png', 290, 365)
 fg.x, fg.y = 0, 0
 fg.alpha = 0.75
+
 
 _G.loadingScreen.bg = bg
 _G.loadingScreen.fg = fg

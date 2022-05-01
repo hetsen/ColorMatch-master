@@ -192,7 +192,9 @@ function constructors.bar(progDispGroup, params)
 	data.progressBar = display.newRect(contentGroup, 0, -data.barSize/2, data.barWidth, data.barSize)
 	data.progressBar.alpha = data.focusAlpha
 	data.progressBar:setFillColor(unpack(data.color))
-	data.progressBar:setReferencePoint(display.CenterLeftReferencePoint)
+	--data.progressBar:setReferencePoint(display.CenterLeftReferencePoint)
+	data.progressBar.anchorX = 0
+	data.progressBar.anchorY = 0.5
 
 	progDispGroup:setProgress(data.value)
 

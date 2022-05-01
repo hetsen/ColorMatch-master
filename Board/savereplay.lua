@@ -66,7 +66,9 @@ function scene:create(e)
 
 			dialogueobj = display.newImageRect(displayGroup, 'Graphics/Menu/menu_backdrop.png', 1032, 1032)
 			dialogueobj.xScale, dialogueobj.yScale = 0.25, 0.3
-			dialogueobj:setReferencePoint(display.CenterReferencePoint)
+			--dialogueobj:setReferencePoint(display.CenterReferencePoint)
+			dialogueobj.anchorX = 0.5
+			dialogueobj.anchorY = 0.5
 			dialogueobj.x = _W*.5
 			dialogueobj.y = _H*.5
 			dialogueobj:setFillColor(200,255,255)

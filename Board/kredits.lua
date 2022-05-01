@@ -27,7 +27,8 @@ local blinky
 local doTransitions
 local headGroup = display.newGroup()
 local eyeGroup = display.newGroup()
-local armGroup = display.newGroup()
+local armGroup = display.newGroup() --Who dis?
+armGroup.alpha = 0.01
 local displayGroup	= display.newGroup()
 local stopIt
 local gotoStart
@@ -45,7 +46,7 @@ function scene:create(e)
 	local background = display.newImageRect (group,"Graphics/Backgrounds/dancefloor01.png",_W,_H)
 	background.x = _W*.5
 	background.y = _H*.5
-	background:setFillColor(200)
+	background:setFillColor(200/255)
 	background:toBack()
 	hasLeftScene = false
 	audio.setVolume(globalmusicvolume, {channel = 2})
@@ -71,7 +72,9 @@ function scene:create(e)
 	finger1.y=-10
 	finger1.x=-1
 	hand.x=7
-	armGroup:setReferencePoint(display.TopCenterReferencePoint)
+	--armGroup:setReferencePoint(display.TopCenterReferencePoint)
+	armGroup.anchorX = .5
+	armGroup.anchorY = 0
 	armGroup.y=_H
 	armGroup.x=150
 	rect = display.newRect(headGroup,0,0,50,50)
@@ -87,7 +90,9 @@ function scene:create(e)
 	eyeRight:setFillColor(0)
 	headGroup.y = _H+rect.height*.5
 	headGroup:insert(eyeGroup)
-	eyeGroup:setReferencePoint(display.CenterReferencePoint)
+	eyeGroup.anchorX = .5
+	eyeGroup.anchorY = .5
+	--eyeGroup:setReferencePoint(display.CenterReferencePoint)
 	group:toFront()
 	--</dude>
 	-- Name
@@ -101,7 +106,8 @@ function scene:create(e)
 		{title = 'Game Concept', 		names = {'Jens Tornberg'}},
 		{title = 'Technical Advisors', 	names = {'Oskar Andersson','Tommy Lindh','Marcus Thunström'}},
 		{title = 'Testers', 			names = {'Joel Carlsson', 'Marcus Thunström', 'Kevin Sund'}},
-		{title = 'Produced by', 		names = {'10FINGERS AB'}},
+		--{title = 'Produced by', 		names = {'10FINGERS AB'}},
+		{title = 'Produced by', 		names = {'ONEFINGERS'}},
 		{title = 'Special thanks to', 	names = {'Fredrik Zetterstrand', 'Caleb Place'}},
 	}
 
@@ -124,7 +130,7 @@ function scene:create(e)
 		local function makegiantblobgirl()
 			giant = display.newGroup()
 			giant.blob = display.newImageRect(giant, "pics/marker.png",120,120 )
-			giant.blob:setFillColor (255,100,200)
+			giant.blob:setFillColor (255/255,100/255,200/255)
 			giant.blob.alpha = .8
 			giant.eye = {}
 			giant.x = -600
@@ -137,7 +143,7 @@ function scene:create(e)
 				giant.eye[j].yScale = .18
 				giant.eye[j].xScale = .2
 				
-				giant.eye[j]:setFillColor(255,255,255)
+				giant.eye[j]:setFillColor(255/255,255/255,255/255)
 				giant.eye[j].dot:setFillColor(0,0,0)
 
 				--blobgirl[i].eye[j]:setStrokeColor(0,0,0)
@@ -178,7 +184,7 @@ function scene:create(e)
 			blobgirl[i] = display.newGroup()
 
 			blobgirl[i].blob = display.newImageRect(blobgirl[i], "pics/marker.png",40,40 )
-			blobgirl[i].blob:setFillColor (255,100,200)
+			blobgirl[i].blob:setFillColor (255/255,100/255,200/255)
 
 			blobgirl[i].blob.alpha = .8
 			blobgirl[i].eye={}
@@ -195,7 +201,7 @@ function scene:create(e)
 				blobgirl[i].eye[j].yScale = .18
 				blobgirl[i].eye[j].xScale = .2
 				
-				blobgirl[i].eye[j]:setFillColor(255,255,255)
+				blobgirl[i].eye[j]:setFillColor(255/255,255/255,255/255)
 				blobgirl[i].eye[j].dot:setFillColor(0,0,0)
 
 				--blobgirl[i].eye[j]:setStrokeColor(0,0,0)
@@ -260,7 +266,7 @@ function scene:create(e)
 				Sblob.eye[j].yScale = .18
 				Sblob.eye[j].xScale = .2
 				
-				Sblob.eye[j]:setFillColor(255,255,255)
+				Sblob.eye[j]:setFillColor(255/255,255/255,255/255)
 				Sblob.eye[j].dot:setFillColor(0,0,0)
 
 				Sblob.eye[j]:setStrokeColor(0,0,0)
@@ -343,10 +349,10 @@ function scene:create(e)
 	end 
 
 	local function dotheflash()
-		flash:setFillColor(math.random(255),math.random(255),math.random(255))
+		flash:setFillColor(math.random(255)/255,math.random(255)/255,math.random(255)/255)
 		flash.alpha = 1
 
-		flash2:setFillColor(math.random(255),math.random(255),math.random(255))
+		flash2:setFillColor(math.random(255)/255,math.random(255)/255,math.random(255)/255)
 		flash2.alpha = 1
 
 		background.y = _H*.5 + 50
@@ -383,7 +389,7 @@ function scene:create(e)
 
 		marker[i].blob.alpha = .8
 		marker[i].eye={}
-		marker[i].blob:setFillColor (math.random(255),math.random(255),math.random(255))
+		marker[i].blob:setFillColor (math.random(255)/255,math.random(255)/255,math.random(255)/255)
 
 		for j = 1,2 do 
 			marker[i].eye[j] = display.newCircle(marker[i], 0,0,30)
@@ -392,7 +398,7 @@ function scene:create(e)
 			marker[i].eye[j].yScale = .1
 			marker[i].eye[j].xScale = .1
 			
-			marker[i].eye[j]:setFillColor(255,255,255)
+			marker[i].eye[j]:setFillColor(255/255,255/255,255/255)
 			marker[i].eye[j].dot:setFillColor(0,0,0)
 
 			marker[i].eye[j]:setStrokeColor(0,0,0)

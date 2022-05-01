@@ -266,15 +266,17 @@ obj.vial_shadow.alpha = 0.3
 obj.vial:setFillColor(220,220,220)
 obj.vial.alpha = 0.85
 
-	obj.vial_shadow. x = _W*.62
-	obj.vial_shadow.y = _H*.65
+	--obj.vial_shadow. x = _W*.62
+	--obj.vial_shadow.y = _H*.65
+	obj.vial_shadow.x = _W*.55
+	obj.vial_shadow.y = _H*.83
 	obj.vial_shadow:setFillColor(40*r2,40*g2,40*b2)
 	obj.vial_shadow.xScale = 0.5
 	obj.vial_shadow.yScale = 0.5
 	obj.vial_shadow.rotation = -20
-	obj.vial_shadow:setReferencePoint(BottomLeftReferencePoint)
-	--obj.vial_shadow.anchorX = 0
-	--obj.vial_shadow.anchorY = 1
+	--obj.vial_shadow:setReferencePoint(BottomLeftReferencePoint)
+	obj.vial_shadow.anchorX = 0
+	obj.vial_shadow.anchorY = 1
 
 	obj.vial.x = _W*.5
 	--obj.vial.y = _H*.59
@@ -434,9 +436,9 @@ end
 --
 
 obj.menubox = display.newImageRect(group_Menubox, 'Graphics/Menu/menu_backdrop.png', 1032, 1032)
-		obj.menubox:setReferencePoint(display.CenterReferencePoint)
-		--obj.menubox.anchorX = .5
-		--obj.menubox.anchorY = .5
+		--obj.menubox:setReferencePoint(display.CenterReferencePoint)
+		obj.menubox.anchorX = .5
+		obj.menubox.anchorY = .5
 		obj.menubox.x = _W*.5
 		obj.menubox.y = _H*.7
 		obj.menubox.alpha = 0.01

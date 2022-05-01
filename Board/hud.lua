@@ -68,9 +68,9 @@ local marked = display.newRect(0,0,200,40)
 	local hudSpacing = 30 
 local thatReturnTrueRect
 marked:setFillColor(0,255,0,100)
-marked:setReferencePoint(display.TopCenterReferencePoint)
---marked.anchorX = .5
---marked.anchorY = 0
+--marked:setReferencePoint(display.TopCenterReferencePoint)
+marked.anchorX = .5
+marked.anchorY = 0
 marked.isVisible = false
 
 hudGroup:insert(bucketGroup)
@@ -169,18 +169,18 @@ function hud.createHud(GameBoard,group)
 	bucketRedOnTop = display.newRoundedRect(bucketGroup,0,15,17,40,4)
 	bucketRedOnTop:setFillColor(255,0,0)
 	bucketRedOnTop.yScale = .000001
-	bucketRedOnTop:setReferencePoint(display.BottomCenterReferencePoint)
-	--bucketRedOnTop.anchorX = .5
-	--bucketRedOnTop.anchorY = 1
+	--bucketRedOnTop:setReferencePoint(display.BottomCenterReferencePoint)
+	bucketRedOnTop.anchorX = .5
+	bucketRedOnTop.anchorY = 1
 	bucketRedOnTop.x,bucketRedOnTop.y = 20,45
 
 	--Green Bucket
 	bucketGreenOnTop = display.newRoundedRect(bucketGroup,0,15,17,40,4)
 	bucketGreenOnTop:setFillColor(0,255,0)
 	bucketGreenOnTop.yScale = .000001
-	bucketGreenOnTop:setReferencePoint(display.BottomCenterReferencePoint)
-	--bucketGreenOnTop.anchorX = .5
-	--bucketGreenOnTop.anchorY = 1
+	--bucketGreenOnTop:setReferencePoint(display.BottomCenterReferencePoint)
+	bucketGreenOnTop.anchorX = .5
+	bucketGreenOnTop.anchorY = 1
 	bucketGreenOnTop.x,bucketGreenOnTop.y = 41,45
 
 
@@ -188,9 +188,9 @@ function hud.createHud(GameBoard,group)
 	bucketBlueOnTop = display.newRoundedRect(bucketGroup,0,15,17,40,4)
 	bucketBlueOnTop:setFillColor(0,0,255)
 	bucketBlueOnTop.yScale = .000001
-	bucketBlueOnTop:setReferencePoint(display.BottomCenterReferencePoint)
-	--bucketBlueOnTop.anchorX = .5
-	--bucketBlueOnTop.anchorY = 1
+	--bucketBlueOnTop:setReferencePoint(display.BottomCenterReferencePoint)
+	bucketBlueOnTop.anchorX = .5
+	bucketBlueOnTop.anchorY = 1
 	bucketBlueOnTop.x, bucketBlueOnTop.y = 62,45
 	
 
@@ -202,9 +202,9 @@ function hud.createHud(GameBoard,group)
 
 	-- Find the Cure logo for show in shared screen shot.
 	ftcLogo = display.newImageRect(hudGroup, "Graphics/Logo/findthecure_logo_notentacles.png",_W*0.25, _W*0.25*279/400)
-	ftcLogo:setReferencePoint(BottomRightReferencePoint)
-	--ftcLogo.anchorX = 1
-	--ftcLogo.anchorY = 1
+	--ftcLogo:setReferencePoint(BottomRightReferencePoint)
+	ftcLogo.anchorX = 1
+	ftcLogo.anchorY = 1
 	ftcLogo.x = _W*0.86
 	ftcLogo.y = _H*0.93
 	ftcLogo.alpha = 0
@@ -414,9 +414,9 @@ function hud.createHud(GameBoard,group)
 	--MenuGroup settings
 
 
-	mainMenuGroup:setReferencePoint(display.CenterReferencePoint)
-	--mainMenuGroup.anchorX = .5
-	--mainMenuGroup.anchorY = .5
+	--mainMenuGroup:setReferencePoint(display.CenterReferencePoint)
+	mainMenuGroup.anchorX = .5
+	mainMenuGroup.anchorY = .5
 	mainMenuGroup.x = -_W
 	mainMenuGroup.y = _H*.4
 
